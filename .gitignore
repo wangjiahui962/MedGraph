@@ -1,0 +1,24 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+credentials.json
+**/credentials.json
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python / OS / editor artifacts
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+venv/
+env/
+.idea/
+.vscode/
+
+# Local runtime output and caches
+*.log
+.pytest_cache/

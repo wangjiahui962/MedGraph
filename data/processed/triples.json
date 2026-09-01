@@ -1,0 +1,353 @@
+[
+  {
+    "subject": "哮喘",
+    "subject_type": "疾病",
+    "relation": "常见症状",
+    "object": "咳嗽",
+    "object_type": "症状",
+    "source_document_id": "doc_000001",
+    "source_text": "主要特征是出现广泛多变的可逆性气流受限，并引起反复发作性的喘息、胸闷、咳嗽等症状，常在夜间或清晨发作或加剧"
+  },
+  {
+    "subject": "哮喘",
+    "subject_type": "疾病",
+    "relation": "常见症状",
+    "object": "喘息",
+    "object_type": "症状",
+    "source_document_id": "doc_000001",
+    "source_text": "主要特征是出现广泛多变的可逆性气流受限，并引起反复发作性的喘息、胸闷、咳嗽等症状，常在夜间或清晨发作或加剧"
+  },
+  {
+    "subject": "哮喘",
+    "subject_type": "疾病",
+    "relation": "常见症状",
+    "object": "胸闷",
+    "object_type": "症状",
+    "source_document_id": "doc_000001",
+    "source_text": "主要特征是出现广泛多变的可逆性气流受限，并引起反复发作性的喘息、胸闷、咳嗽等症状，常在夜间或清晨发作或加剧"
+  },
+  {
+    "subject": "哮喘",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "环境因素",
+    "object_type": "疾病",
+    "source_document_id": "doc_000001",
+    "source_text": "目前普遍認為哮喘是基因和环境因素共同导致的"
+  },
+  {
+    "subject": "哮喘",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "基因",
+    "object_type": "疾病",
+    "source_document_id": "doc_000001",
+    "source_text": "目前普遍認為哮喘是基因和环境因素共同导致的"
+  },
+  {
+    "subject": "哮喘",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "过敏原",
+    "object_type": "疾病",
+    "source_document_id": "doc_000001",
+    "source_text": "環境因素通常包含：暴露於空氣汙染和过敏原"
+  },
+  {
+    "subject": "哮喘",
+    "subject_type": "疾病",
+    "relation": "检查方法",
+    "object": "呼吸量测定法",
+    "object_type": "检查方法",
+    "source_document_id": "doc_000001",
+    "source_text": "对哮喘的诊断通常基于症状的类型、不同时间下对治疗的反应，及呼吸量测定法"
+  },
+  {
+    "subject": "哮喘",
+    "subject_type": "疾病",
+    "relation": "治疗",
+    "object": "沙丁胺醇",
+    "object_type": "药物",
+    "source_document_id": "doc_000001",
+    "source_text": "急性症状的治疗通常是通过短效β2激动药（例如沙丁胺醇）和口服皮质类固醇"
+  },
+  {
+    "subject": "哮喘",
+    "subject_type": "疾病",
+    "relation": "治疗",
+    "object": "糖皮质激素",
+    "object_type": "药物",
+    "source_document_id": "doc_000001",
+    "source_text": "在极其严重的病例中，才可能需要静脉注射糖皮质激素、硫酸镁和住院治疗"
+  },
+  {
+    "subject": "慢性阻塞性肺病",
+    "subject_type": "疾病",
+    "relation": "常见症状",
+    "object": "呼吸短促",
+    "object_type": "症状",
+    "source_document_id": "doc_000002",
+    "source_text": "慢性阻塞性肺病（英語：Chronic obstructive pulmonary disease，缩写为COPD），常简称为肺阻塞或慢阻肺，是一种以持续性的气流受限为特征的阻塞性肺疾病，以因气道异常（支气管炎、细支气管炎）和/肺泡异常（肺气肿）进而引起慢性呼吸症状（呼吸短促、咳嗽和咳痰）及进行性、持续性的气流受限为特征，常被誤認為感冒或氣喘，因此超過八成確診時已經是中重度"
+  },
+  {
+    "subject": "慢性阻塞性肺病",
+    "subject_type": "疾病",
+    "relation": "常见症状",
+    "object": "咳嗽",
+    "object_type": "症状",
+    "source_document_id": "doc_000002",
+    "source_text": "慢性阻塞性肺病（英語：Chronic obstructive pulmonary disease，缩写为COPD），常简称为肺阻塞或慢阻肺，是一种以持续性的气流受限为特征的阻塞性肺疾病，以因气道异常（支气管炎、细支气管炎）和/肺泡异常（肺气肿）进而引起慢性呼吸症状（呼吸短促、咳嗽和咳痰）及进行性、持续性的气流受限为特征，常被誤認為感冒或氣喘，因此超過八成確診時已經是中重度"
+  },
+  {
+    "subject": "慢性阻塞性肺病",
+    "subject_type": "疾病",
+    "relation": "常见症状",
+    "object": "咳痰",
+    "object_type": "症状",
+    "source_document_id": "doc_000002",
+    "source_text": "慢性阻塞性肺病（英語：Chronic obstructive pulmonary disease，缩写为COPD），常简称为肺阻塞或慢阻肺，是一种以持续性的气流受限为特征的阻塞性肺疾病，以因气道异常（支气管炎、细支气管炎）和/肺泡异常（肺气肿）进而引起慢性呼吸症状（呼吸短促、咳嗽和咳痰）及进行性、持续性的气流受限为特征，常被誤認為感冒或氣喘，因此超過八成確診時已經是中重度"
+  },
+  {
+    "subject": "慢性阻塞性肺病",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "吸烟",
+    "object_type": "疾病",
+    "source_document_id": "doc_000002",
+    "source_text": "吸烟是导致慢性阻塞性肺病的最主要的原因"
+  },
+  {
+    "subject": "慢性阻塞性肺病",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "空气污染",
+    "object_type": "疾病",
+    "source_document_id": "doc_000002",
+    "source_text": "其他相对次要的因素包括空气污染和遗传等"
+  },
+  {
+    "subject": "慢性阻塞性肺病",
+    "subject_type": "疾病",
+    "relation": "治疗",
+    "object": "康复治疗",
+    "object_type": "治疗方法",
+    "source_document_id": "doc_000002",
+    "source_text": "慢性阻塞性肺病的治疗方式包括戒烟、接种疫苗、肺康复治疗，以及常用的各种吸入性支气管扩张药和皮質類固醇"
+  },
+  {
+    "subject": "慢性阻塞性肺病",
+    "subject_type": "疾病",
+    "relation": "治疗",
+    "object": "戒烟",
+    "object_type": "治疗方法",
+    "source_document_id": "doc_000002",
+    "source_text": "慢性阻塞性肺病的治疗方式包括戒烟、接种疫苗、肺康复治疗，以及常用的各种吸入性支气管扩张药和皮質類固醇"
+  },
+  {
+    "subject": "肺氣腫",
+    "subject_type": "疾病",
+    "relation": "常见症状",
+    "object": "咳嗽",
+    "object_type": "症状",
+    "source_document_id": "doc_000004",
+    "source_text": "常见症状有咳嗽、多痰、气急、紫绀等"
+  },
+  {
+    "subject": "肺氣腫",
+    "subject_type": "疾病",
+    "relation": "常见症状",
+    "object": "多痰",
+    "object_type": "症状",
+    "source_document_id": "doc_000004",
+    "source_text": "常见症状有咳嗽、多痰、气急、紫绀等"
+  },
+  {
+    "subject": "瀰漫性泛細支氣管炎",
+    "subject_type": "疾病",
+    "relation": "常见症状",
+    "object": "咳嗽",
+    "object_type": "症状",
+    "source_document_id": "doc_000006",
+    "source_text": "本病的主要病理特征包括终末细支气管周围的慢性炎症及结节样改变，并可伴随慢性鼻窦炎和大量伴黏痰的咳嗽等症状"
+  },
+  {
+    "subject": "瀰漫性泛細支氣管炎",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "遗传因素",
+    "object_type": "疾病",
+    "source_document_id": "doc_000006",
+    "source_text": "目前认为，该病可能与宿主对特定细菌或病毒的易感性或免疫应答异常有关，部分遗传因素可能也参与其发病机制，相关基因多见于东亚人群"
+  },
+  {
+    "subject": "瀰漫性泛細支氣管炎",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "基因",
+    "object_type": "疾病",
+    "source_document_id": "doc_000006",
+    "source_text": "目前认为，该病可能与宿主对特定细菌或病毒的易感性或免疫应答异常有关，部分遗传因素可能也参与其发病机制，相关基因多见于东亚人群"
+  },
+  {
+    "subject": "瀰漫性泛細支氣管炎",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "病毒",
+    "object_type": "疾病",
+    "source_document_id": "doc_000006",
+    "source_text": "目前认为，该病可能与宿主对特定细菌或病毒的易感性或免疫应答异常有关，部分遗传因素可能也参与其发病机制，相关基因多见于东亚人群"
+  },
+  {
+    "subject": "瀰漫性泛細支氣管炎",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "细菌",
+    "object_type": "疾病",
+    "source_document_id": "doc_000006",
+    "source_text": "目前认为，该病可能与宿主对特定细菌或病毒的易感性或免疫应答异常有关，部分遗传因素可能也参与其发病机制，相关基因多见于东亚人群"
+  },
+  {
+    "subject": "瀰漫性泛細支氣管炎",
+    "subject_type": "疾病",
+    "relation": "治疗",
+    "object": "抗生素",
+    "object_type": "药物",
+    "source_document_id": "doc_000006",
+    "source_text": "临床上常采用大环内酯类抗生素（如红霉素）进行长期治疗，以减轻症状并延缓病程进展，但目前尚无根治方法"
+  },
+  {
+    "subject": "心肌梗死",
+    "subject_type": "疾病",
+    "relation": "常见症状",
+    "object": "胸痛",
+    "object_type": "症状",
+    "source_document_id": "doc_000007",
+    "source_text": "心肌梗塞的症状是不同程度的胸痛不适，也可能會轉變為肩膀、手臂、背部、頸部或是下巴的不適，胸痛一般會在胸腔的中央或是左側，會持續幾分鐘，不適的感覺會類似胃灼熱"
+  },
+  {
+    "subject": "动脉粥样硬化",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "血栓",
+    "object_type": "疾病",
+    "source_document_id": "doc_000008",
+    "source_text": "动脉粥样硬化（英語：atherosclerosis）或粥样硬化，是动脉内膜因多种原因损伤后，内膜下积聚脂质、复合糖类并引发出血、血栓形成、纤维组织增生，使动脉管壁增厚、管腔缩小、血流受阻、管壁变硬和弹性减退的现象"
+  },
+  {
+    "subject": "扩张型心肌病",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "高血压",
+    "object_type": "疾病",
+    "source_document_id": "doc_000012",
+    "source_text": "扩心病的诊断必须先排除高血压、冠心病、瓣膜病、先心病、心包病、肺心病等明确导致心功能下降的病因"
+  },
+  {
+    "subject": "放射性直肠炎",
+    "subject_type": "疾病",
+    "relation": "治疗",
+    "object": "放射治疗",
+    "object_type": "治疗方法",
+    "source_document_id": "doc_000019",
+    "source_text": "放射性直肠炎（radiation proctitis）又称放射性直肠病（radiation proctopathy）是一种以在放射治疗中暴露于X射线或其他电离辐射后直肠受损为特征的疾病"
+  },
+  {
+    "subject": "弥漫性毒性甲状腺肿",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "感染",
+    "object_type": "疾病",
+    "source_document_id": "doc_000020",
+    "source_text": "該疾病的發作原因可能包含壓力、感染，或是分娩"
+  },
+  {
+    "subject": "阿茲海默症",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "糖尿病",
+    "object_type": "疾病",
+    "source_document_id": "doc_000026",
+    "source_text": "截至2024年的研究指出失智症之可改善風險因素包括聽力受損、 高壞膽固醇 (LDL)、空氣污染、早年缺乏教育、社交孤立、憂鬱症、頭部外傷、高血壓、缺乏運動、糖尿病、吸煙、未經治療的視力受損、中年肥胖以及飲酒過量"
+  },
+  {
+    "subject": "阿茲海默症",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "肥胖",
+    "object_type": "疾病",
+    "source_document_id": "doc_000026",
+    "source_text": "截至2024年的研究指出失智症之可改善風險因素包括聽力受損、 高壞膽固醇 (LDL)、空氣污染、早年缺乏教育、社交孤立、憂鬱症、頭部外傷、高血壓、缺乏運動、糖尿病、吸煙、未經治療的視力受損、中年肥胖以及飲酒過量"
+  },
+  {
+    "subject": "解離性身分疾患",
+    "subject_type": "疾病",
+    "relation": "治疗",
+    "object": "抗抑郁药",
+    "object_type": "药物",
+    "source_document_id": "doc_000028",
+    "source_text": "目前尚无特定药物能直接治疗DID，但可使用精神药物缓解共病症状，例如抗抑郁药用于焦虑和抑郁，或镇静催眠药改善睡眠等问题"
+  },
+  {
+    "subject": "解離性身分疾患",
+    "subject_type": "疾病",
+    "relation": "治疗",
+    "object": "心理治疗",
+    "object_type": "治疗方法",
+    "source_document_id": "doc_000028",
+    "source_text": "治疗通常包括支持性照护与心理治疗"
+  },
+  {
+    "subject": "嗜睡症",
+    "subject_type": "疾病",
+    "relation": "常见症状",
+    "object": "嗜睡",
+    "object_type": "症状",
+    "source_document_id": "doc_000030",
+    "source_text": "在《精神疾病诊断与统计手册》第五版（DSM-5）中，嗜睡症（有多种亚型）出现在睡眠-觉醒障碍中"
+  },
+  {
+    "subject": "禽流感",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "感染",
+    "object_type": "疾病",
+    "source_document_id": "doc_000032",
+    "source_text": "），全名鳥禽類流行性感冒（Avian Influenza，AI），是由病毒引起的动物传染病，通常只感染鸟类，少见情况会感染猪"
+  },
+  {
+    "subject": "禽流感",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "病毒",
+    "object_type": "疾病",
+    "source_document_id": "doc_000032",
+    "source_text": "），全名鳥禽類流行性感冒（Avian Influenza，AI），是由病毒引起的动物传染病，通常只感染鸟类，少见情况会感染猪"
+  },
+  {
+    "subject": "核糖核酸病毒",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "感染",
+    "object_type": "疾病",
+    "source_document_id": "doc_000034",
+    "source_text": "由RNA病毒感染造成的著名人類疾病包括愛滋病（AIDS）、埃博拉出血熱、嚴重急性呼吸道症候群（SARS）、2019冠状病毒病（COVID-19）、流行性感冒、丙型肝炎、西尼羅河熱、脊髓灰質炎、麻疹"
+  },
+  {
+    "subject": "核糖核酸病毒",
+    "subject_type": "疾病",
+    "relation": "病因",
+    "object": "病毒",
+    "object_type": "疾病",
+    "source_document_id": "doc_000034",
+    "source_text": "由RNA病毒感染造成的著名人類疾病包括愛滋病（AIDS）、埃博拉出血熱、嚴重急性呼吸道症候群（SARS）、2019冠状病毒病（COVID-19）、流行性感冒、丙型肝炎、西尼羅河熱、脊髓灰質炎、麻疹"
+  },
+  {
+    "subject": "近距离治疗",
+    "subject_type": "疾病",
+    "relation": "治疗",
+    "object": "放射治疗",
+    "object_type": "治疗方法",
+    "source_document_id": "doc_000039",
+    "source_text": "近距离治疗（取自希腊語「brachys」一词，意思是“短距离”），也称作内照射放疗、密封源式放射治疗、镭疗法或内部镭疗法，是放射治疗的一种形式，即将放射源放置于需要治疗的部位内部或附近"
+  }
+]
