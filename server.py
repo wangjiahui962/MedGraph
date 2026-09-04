@@ -2,7 +2,7 @@
 """MedGraph 本地轻量后端服务（仅用 Python 标准库）。
 
 用途：给前端 web 界面提供两个能力——
-    1. POST /api/collect  —— 增加新数据：从中文维基百科搜索 N 篇新文章，繁体转简体后存入 documents.db。
+    1. POST /api/collect  —— 增加新数据：从中文维基百科搜索 N 篇新文章，繁体转简体后存入 documents.db，默认继续抽取并更新图谱（auto_extract=false 可关闭）。
     2. POST /api/extract  —— 提取现有数据：预处理 → LLM 抽取 → 关键词过滤 → 入库 → 导出前端。
     3. GET  /api/jobs     —— 查询当前/最近任务状态（前端轮询用，便于提示“可以刷新了”）。
 
@@ -117,11 +117,11 @@ def _export_to_frontend() -> tuple[bool, str]:
     return True, "；".join(msgs)
 
 
-def _run_extract(job_id: str, limit: int = 0) -> None:
+def _run_extract(job_id: str, limit: int = 0, finalize: bool = True) -> None:
     """提取现有数据：预处理 → 抽取 → 入库 → 导出前端。"""
     steps = [
         ("数据预处理", (sys.executable, "preprocess/preprocess.py")),
-        ("分层信息抽取", (sys.executable, "extraction/extract.py") + (("--limit", str(limit)) if limit > 0 else ())),
+        ("增量分层信息抽取", (sys.executable, "extraction/extract.py") + (("--limit", str(limit)) if limit > 0 else ())),
     ]
     for label, cmd in steps:
         _update_job(job_id, message=f"正在执行：{label}…")
@@ -140,6 +140,14 @@ def _run_extract(job_id: str, limit: int = 0) -> None:
                     message="关键词过滤失败", detail=out)
         return
     # 本轮抽取结果入库（triples_extracted.json → triples.db，按唯一索引增量合并、不清库）
+    # 先将已有前端图谱导入数据库，避免数据库为空时导出覆盖历史知识。
+    _update_job(job_id, message="正在校准历史图谱数据库…")
+    if TRIPLES_JSON.is_file():
+        code, out = _run_in_project(sys.executable, "db/store_triples.py", str(TRIPLES_JSON))
+        if code != 0:
+            _update_job(job_id, status="failed", finished_at=_now(),
+                        message="历史图谱初始化失败", detail=out)
+            return
     _update_job(job_id, message="正在把本轮抽取结果入库…")
     code, out = _run_in_project(sys.executable, "db/store_triples.py")
     if code != 0:
@@ -153,6 +161,13 @@ def _run_extract(job_id: str, limit: int = 0) -> None:
         _update_job(job_id, status="failed", finished_at=_now(),
                     message="三元组导出失败", detail=out)
         return
+    # 为前端补充置信度、来源统计和质量标记，并生成冲突报告
+    _update_job(job_id, message="正在评估三元组质量并检测冲突…")
+    code, out = _run_in_project(sys.executable, "quality/assess.py")
+    if code != 0:
+        _update_job(job_id, status="failed", finished_at=_now(),
+                    message="三元组质量评估失败", detail=out)
+        return
     # 导出文档原文索引（前端“展开原文”按需读取；opencc 缺失时保留原文不中断）
     _update_job(job_id, message="正在导出文档原文索引…")
     code, out = _run_in_project(sys.executable, "db/store_documents.py", "--export-frontend")
@@ -164,12 +179,13 @@ def _run_extract(job_id: str, limit: int = 0) -> None:
     if not ok:
         _update_job(job_id, status="failed", finished_at=_now(), message=msg)
         return
-    _update_job(job_id, status="succeeded", finished_at=_now(),
-                message="提取完成，图谱数据与文档原文已更新。", detail=msg)
+    if finalize:
+        _update_job(job_id, status="succeeded", finished_at=_now(),
+                    message="提取完成，图谱数据与文档原文已更新。", detail=msg)
 
 
-def _run_collect(job_id: str, count: int = 5) -> None:
-    """增加新数据：搜索维基百科新增几篇文章（繁体转简体）并导入 documents.db。"""
+def _run_collect(job_id: str, count: int = 5, auto_extract: bool = True) -> None:
+    """采集维基文章；默认继续执行抽取并发布最新图谱。"""
     import re
 
     _update_job(job_id, message=f"正在从维基百科搜索新增最多 {count} 篇文章…")
@@ -193,10 +209,22 @@ def _run_collect(job_id: str, count: int = 5) -> None:
     if not ok:
         _update_job(job_id, status="failed", finished_at=_now(), message=msg)
         return
-    if added:
-        message = f"维基新增完成：已导入 {added} 篇文章（繁体已转简体）。"
+    if auto_extract:
+        _update_job(job_id, message="采集完成，正在自动抽取并更新图谱…")
+        _run_extract(job_id, finalize=False)
+        with _JOBS_LOCK:
+            failed = _JOBS.get(job_id, {}).get("status") == "failed"
+        if failed:
+            return
+        message = (
+            f"新增 {added} 篇文章，已完成信息抽取并更新图谱。"
+            if added else "没有新增文章，已重新抽取并更新图谱。"
+        )
     else:
-        message = "维基没有找到新的可添加文章（或检索词都命中已有文章）。"
+        message = (
+            f"维基新增完成：已导入 {added} 篇文章（繁体已转简体）。"
+            if added else "维基没有找到新的可添加文章（或检索词都命中已有文章）。"
+        )
     _update_job(job_id, status="succeeded", finished_at=_now(),
                 message=message, detail=out.strip())
 
@@ -268,13 +296,17 @@ class MedGraphHandler(BaseHTTPRequestHandler):
                 return
             job_id = _spawn("extract", limit=limit)
         else:
-            # /api/collect：从维基搜索新增 N 篇文章（body.count，默认 5）
+            # /api/collect：采集后默认自动抽取（可传 auto_extract=false 仅采集）
             try:
                 count = max(1, min(100, int(body.get("count") or 5)))
             except (TypeError, ValueError):
                 _json_response(self, 400, {"error": "参数 count 必须是整数。"})
                 return
-            job_id = _spawn("collect", count=count)
+            auto_extract = body.get("auto_extract", True)
+            if not isinstance(auto_extract, bool):
+                _json_response(self, 400, {"error": "参数 auto_extract 必须是布尔值。"})
+                return
+            job_id = _spawn("collect", count=count, auto_extract=auto_extract)
         if job_id is None:
             _json_response(
                 self, 409,

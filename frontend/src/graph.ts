@@ -13,6 +13,8 @@ export interface Relation {
   target: string;
   relation: string;
   evidence: Evidence[];
+  confidence: number;
+  qualityFlags: string[];
 }
 export interface Graph {
   nodes: Entity[];
@@ -71,7 +73,13 @@ export function parseGraph(text: string): Graph {
       target,
       relation,
       evidence: [],
+      confidence: 1,
+      qualityFlags: [],
     };
+    const confidence = typeof row.confidence === "number" ? row.confidence : 0.72;
+    edge.confidence = Math.min(edge.confidence, confidence);
+    const flags = Array.isArray(row.quality_flags) ? row.quality_flags.filter((v): v is string => typeof v === "string") : [];
+    edge.qualityFlags = [...new Set([...edge.qualityFlags, ...flags])];
     const evidence = {
       documentId: clean(row.source_document_id),
       text: clean(row.source_text),
@@ -98,6 +106,7 @@ export function parseGraph(text: string): Graph {
 export async function loadGraph(signal?: AbortSignal): Promise<Graph> {
   const response = await fetch(`${import.meta.env.BASE_URL}data/triples.json`, {
     signal,
+    cache: "no-store",
   });
   if (!response.ok)
     throw new Error(

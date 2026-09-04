@@ -83,6 +83,8 @@ export function GraphCanvas({
             source: e.source,
             target: e.target,
             label: e.relation,
+            confidence: e.confidence,
+            review: e.confidence < 0.6 ? 1 : 0,
           },
         })),
       ],
@@ -124,12 +126,28 @@ export function GraphCanvas({
           selector: "edge",
           style: {
             width: 1.3,
-            "line-color": "#bed0d1",
-            "target-arrow-color": "#9cb6b5",
+            "line-color": "#7653b6",
+            "target-arrow-color": "#63429f",
             "target-arrow-shape": "triangle",
             "curve-style": "bezier",
             // 隐藏连线上的关系文字，避免内圈文字扎堆
             label: "",
+          },
+        },
+        {
+          selector: "edge[confidence < 0.6]",
+          style: {
+            "line-color": "#d58b2c",
+            "target-arrow-color": "#d58b2c",
+            "line-style": "dashed",
+            opacity: 0.78,
+          },
+        },
+        {
+          selector: "edge[confidence >= 0.8]",
+          style: {
+            "line-color": "#1b806f",
+            "target-arrow-color": "#1b806f",
           },
         },
         {
@@ -202,6 +220,12 @@ export function GraphCanvas({
           <small>请调整左侧筛选条件</small>
         </div>
       )}
+      <div className="confidence-legend" aria-label="关系置信度图例">
+        <strong>关系置信度</strong>
+        <span><i className="legend-line high" />高可信 ≥ 80%</span>
+        <span><i className="legend-line medium" />中可信 60%～79%</span>
+        <span><i className="legend-line review" />待核验 &lt; 60%</span>
+      </div>
       <div className="canvas-tools">
         <button aria-label="放大图谱" title="放大" onClick={() => zoom(1.25)}>
           ＋

@@ -5,15 +5,45 @@ import {
   neighborhood,
   searchNodes,
   type Graph,
+  type Relation,
 } from "./graph";
 import { GraphCanvas, palette } from "./GraphCanvas";
-import { fetchDocument, type DocumentRecord } from "./documents";
+import { clearDocumentsCache, fetchDocument, type DocumentRecord } from "./documents";
 import {
   fetchJobs,
   startCollect,
   startExtract,
   type Job,
 } from "./api";
+
+const TYPE_LABELS: Record<string, string> = {
+  Disease: "疾病",
+  Drug: "药物",
+  Symptom: "症状",
+  Treatment: "治疗方法",
+  Examination: "检查方法",
+  Complication: "并发症",
+  RiskFactor: "危险因素",
+  Department: "科室",
+  Population: "人群",
+};
+
+const RELATION_LABELS: Record<string, string> = {
+  HAS_SYMPTOM: "常见症状",
+  TREATED_BY: "治疗方法",
+  DIAGNOSED_BY: "检查方法",
+  MAY_CAUSE: "病因 / 可能导致",
+  HAS_RISK_FACTOR: "危险因素",
+  HAS_SIDE_EFFECT: "不良反应",
+  HIGH_RISK_FOR: "高风险人群",
+  BELONGS_TO: "所属分类",
+  RELATED_TO: "相关关系",
+};
+
+const typeLabel = (type: string) => TYPE_LABELS[type] ?? type;
+const relationLabel = (relation: string) => RELATION_LABELS[relation] ?? relation;
+const confidenceLabel = (value: number) =>
+  value >= 0.8 ? "高可信" : value >= 0.6 ? "中可信" : "待核验";
 
 export default function App() {
   const [graph, setGraph] = useState<Graph | null>(null);
@@ -37,7 +67,7 @@ export default function App() {
     Math.max(1, Math.round(Number(wikiCount) || 5)),
   );
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  // 记录“曾处于 running”的任务 id：extract 成功结束时据此触发图谱自动刷新
+  // 记录“曾处于 running”的任务 id：数据任务成功结束时触发图谱自动刷新
   const runningSeenRef = useRef<Set<string>>(new Set());
 
   const refreshJobs = async (silent = false) => {
@@ -77,8 +107,10 @@ export default function App() {
     setJobBusy(true);
     try {
       const started =
-        kind === "extract" ? await startExtract() : await startCollect(count);
-      if (kind === "extract") runningSeenRef.current.add(started.job_id);
+        kind === "extract"
+          ? await startExtract()
+          : await startCollect(count, true);
+      runningSeenRef.current.add(started.job_id);
       // 注入一条本地 running 占位，立即轮询后端真实状态
       setJobs((prev) => [
         {
@@ -102,14 +134,14 @@ export default function App() {
     }
   };
 
-  // “提取现有数据”成功结束 → 重新读取 triples.json，避免手动刷新整页
+  // 采集（自动抽取）或“提取现有数据”成功结束 → 重新读取 triples.json
   useEffect(() => {
     const runningNow = new Set(
       jobs.filter((j) => j.status === "running").map((j) => j.id),
     );
     for (const job of jobs) {
       if (
-        job.kind === "extract" &&
+        (job.kind === "extract" || job.kind === "collect") &&
         job.status === "succeeded" &&
         runningSeenRef.current.has(job.id)
       ) {
@@ -127,6 +159,7 @@ export default function App() {
     const abort = new AbortController();
     setGraph(null);
     setError("");
+    clearDocumentsCache();
     loadGraph(abort.signal)
       .then((g) => {
         setGraph(g);
@@ -155,16 +188,30 @@ export default function App() {
     () => (graph ? filterGraph(graph, chosenTypes, chosenRelations) : null),
     [graph, chosenTypes, chosenRelations],
   );
-  const view = useMemo(
-    () => (filtered ? neighborhood(filtered, focus) : null),
-    [filtered, focus],
-  );
+  const view = useMemo(() => {
+    if (!filtered) return null;
+    // 搜索结果可能因左侧筛选被隐藏；选中后用完整图谱定位，避免出现“查到但看不到”。
+    const focusVisible = !focus || filtered.nodes.some((n) => n.id === focus);
+    return neighborhood(focus && !focusVisible ? graph ?? filtered : filtered, focus);
+  }, [filtered, graph, focus]);
   const results = useMemo(
-    () => (filtered ? searchNodes(filtered, query) : []),
-    [filtered, query],
+    () => (graph ? searchNodes(graph, query) : []),
+    [graph, query],
   );
   const selected = graph?.nodes.find((n) => n.id === view?.focusId);
-  const selectedEdge = filtered?.edges.find((e) => e.id === edgeId);
+  const selectedEdge = graph?.edges.find((e) => e.id === edgeId);
+  const selectedAllEdges = graph?.edges.filter(
+    (e) => e.source === selected?.id || e.target === selected?.id,
+  ) ?? [];
+  const relationGroups = useMemo(() => {
+    const groups = new Map<string, Relation[]>();
+    for (const edge of selectedAllEdges) {
+      const bucket = groups.get(edge.relation) ?? [];
+      bucket.push(edge);
+      groups.set(edge.relation, bucket);
+    }
+    return [...groups.entries()].sort((a, b) => relationLabel(a[0]).localeCompare(relationLabel(b[0]), "zh-CN"));
+  }, [selectedAllEdges]);
   const related =
     filtered?.edges.filter(
       (e) => e.source === selected?.id || e.target === selected?.id,
@@ -233,9 +280,9 @@ export default function App() {
               className="action-btn"
               onClick={() => runJob("collect", collectCount)}
               disabled={jobBusy || hasRunning}
-              title="从维基百科搜索新增文章并存入 documents.db（繁体自动转简体）"
+              title="从维基百科采集文章，自动抽取知识并更新图谱"
             >
-              增加新数据
+              增加并更新图谱
             </button>
           </div>
           <button
@@ -289,7 +336,7 @@ export default function App() {
               </button>
             )}
           </section>
-        ) : (
+          ) : (
           <>
             <section className="stats" aria-label="数据概览">
               {[
@@ -397,7 +444,7 @@ export default function App() {
                             background: palette[index % palette.length],
                           }}
                         />
-                        {type}
+                        {typeLabel(type)}
                         <small>
                           {graph.nodes.filter((n) => n.type === type).length}
                         </small>
@@ -430,7 +477,7 @@ export default function App() {
                             toggle(r, chosenRelations, setChosenRelations)
                           }
                         />
-                        {r}
+                        {relationLabel(r)}
                       </label>
                     ))}
                   </div>
@@ -493,8 +540,11 @@ export default function App() {
                     </button>
                     <div className="evidence-title">
                       <strong>{names.get(selectedEdge.source)}</strong>
-                      <span>↓ {selectedEdge.relation}</span>
+                      <span>↓ {relationLabel(selectedEdge.relation)}</span>
                       <strong>{names.get(selectedEdge.target)}</strong>
+                    </div>
+                    <div className={`confidence-badge ${selectedEdge.confidence < 0.6 ? "review" : selectedEdge.confidence < 0.8 ? "medium" : "high"}`}>
+                      置信度 {Math.round(selectedEdge.confidence * 100)}% · {confidenceLabel(selectedEdge.confidence)}
                     </div>
                     <div className="section-label">
                       原文证据 <span>{selectedEdge.evidence.length} 条</span>
@@ -526,38 +576,46 @@ export default function App() {
                           ],
                       }}
                     >
-                      {selected.type}
+                      {typeLabel(selected.type)}
                     </span>
                     <h3 className="entity-name">{selected.name}</h3>
-                    <p className="muted">
-                      当前筛选下关联 {related.length} 条关系
-                    </p>
-                    <div className="section-label">
-                      关联关系 <span>点击查看原句</span>
+                    <div className="entity-stats">
+                      <div><strong>{selectedAllEdges.length}</strong><span>关联三元组</span></div>
+                      <div><strong>{new Set(selectedAllEdges.flatMap((e) => e.evidence.map((x) => x.documentId).filter(Boolean))).size}</strong><span>来源文档</span></div>
+                      <div><strong>{selectedAllEdges.reduce((n, e) => n + e.evidence.length, 0)}</strong><span>证据片段</span></div>
                     </div>
+                    <div className="section-label">
+                      关联知识 <span>{selectedAllEdges.length} 条 · 点击查看原句</span>
+                    </div>
+                    {selectedAllEdges.some((e) => e.confidence < 0.6) && (
+                      <p className="quality-warning">部分关联知识缺少来源或存在类型问题，请优先核验橙色虚线关系。</p>
+                    )}
                     <div className="related-list">
-                      {related.map((e) => {
-                        const other =
-                          e.source === selected.id ? e.target : e.source;
-                        return (
-                          <article className="related" key={e.id}>
+                      {relationGroups.map(([relation, edges]) => (
+                        <div className="relation-group" key={relation}>
+                          <h4>{relationLabel(relation)} <span>{edges.length}</span></h4>
+                          {edges.map((e) => {
+                            const other = e.source === selected.id ? e.target : e.source;
+                            return (
+                              <article className="related" key={e.id}>
                             <button
                               className="relation-link"
                               onClick={() => setEdgeId(e.id)}
                             >
-                              {e.source === selected.id ? "↗" : "↙"}{" "}
-                              {e.relation}
+                              <span className="direction">{e.source === selected.id ? "↗" : "↙"}</span>
                               <span>查看证据 ›</span>
                             </button>
                             <button
                               className="neighbor"
                               onClick={() => pickNode(other)}
                             >
-                              {names.get(other)} <span>→</span>
+                              {names.get(other)} <small>{typeLabel(graph?.nodes.find((n) => n.id === other)?.type ?? "")}</small> <span>→</span>
                             </button>
-                          </article>
-                        );
-                      })}
+                              </article>
+                            );
+                          })}
+                        </div>
+                      ))}
                     </div>
                   </>
                 ) : (
@@ -567,6 +625,7 @@ export default function App() {
                 )}
               </aside>
             </section>
+            <Dashboard graph={graph} />
           </>
         )}
         <footer className="page-footer">
@@ -575,6 +634,76 @@ export default function App() {
         </footer>
       </main>
     </div>
+  );
+}
+
+function Dashboard({ graph }: { graph: Graph }) {
+  const typeCounts = [...new Map(graph.nodes.map((n) => [n.type, graph.nodes.filter((x) => x.type === n.type).length])).entries()]
+    .sort((a, b) => b[1] - a[1]);
+  const relationCounts = [...new Map(graph.edges.map((e) => [e.relation, graph.edges.filter((x) => x.relation === e.relation).length])).entries()]
+    .sort((a, b) => b[1] - a[1]);
+  const degree = new Map(graph.nodes.map((n) => [n.id, 0]));
+  graph.edges.forEach((e) => {
+    degree.set(e.source, (degree.get(e.source) ?? 0) + 1);
+    if (e.source !== e.target) degree.set(e.target, (degree.get(e.target) ?? 0) + 1);
+  });
+  const core = graph.nodes.map((n) => ({ ...n, degree: degree.get(n.id) ?? 0 }))
+    .sort((a, b) => b.degree - a.degree || a.name.localeCompare(b.name, "zh-CN"))
+    .slice(0, 5);
+  const isolated = graph.nodes.filter((n) => (degree.get(n.id) ?? 0) === 0).length;
+  const lowQuality = graph.edges.filter((e) => e.confidence < 0.6).length;
+  const typeTotal = typeCounts.reduce((sum, [, count]) => sum + count, 0) || 1;
+  const relationTotal = relationCounts.reduce((sum, [, count]) => sum + count, 0) || 1;
+  const makeGradient = (items: [string, number][], colors: string[]) => {
+    let cursor = 0;
+    return `conic-gradient(${items.slice(0, 6).map(([_, count], index) => {
+      const start = cursor;
+      cursor += (count / (items.reduce((s, [, c]) => s + c, 0) || 1)) * 360;
+      return `${colors[index % colors.length]} ${start}deg ${cursor}deg`;
+    }).join(",")})`;
+  };
+  return (
+    <section className="dashboard" aria-label="图谱统计分析">
+      <div className="dashboard-heading">
+        <div><p className="eyebrow">DATA INSIGHTS</p><h2>图谱统计分析</h2></div>
+        <span>基于当前已导入的三元组实时计算</span>
+      </div>
+      <div className="donut-grid">
+        <div className="donut-card"><div className="donut" style={{ background: makeGradient(typeCounts, ["#1b806f", "#d69134", "#6382c1", "#ad73a4", "#7c9460", "#8896a0"]) }}><span>{graph.nodes.length.toLocaleString()}<small>实体</small></span></div><div className="donut-caption"><strong>实体构成</strong>{typeCounts.slice(0, 4).map(([type, count]) => <span key={type}><i style={{ background: ["#1b806f", "#d69134", "#6382c1", "#ad73a4"][typeCounts.findIndex((x) => x[0] === type) % 4] }} />{typeLabel(type)} {Math.round((count / typeTotal) * 100)}%</span>)}</div></div>
+        <div className="donut-card"><div className="donut" style={{ background: makeGradient(relationCounts, ["#7653b6", "#4d79bd", "#d69134", "#4a9a91", "#ad73a4", "#8896a0"]) }}><span>{graph.edges.length.toLocaleString()}<small>关系</small></span></div><div className="donut-caption"><strong>关系构成</strong>{relationCounts.slice(0, 4).map(([relation, count], index) => <span key={relation}><i style={{ background: ["#7653b6", "#4d79bd", "#d69134", "#4a9a91"][index] }} />{relationLabel(relation)} {Math.round((count / relationTotal) * 100)}%</span>)}</div></div>
+      </div>
+      <div className="dashboard-grid">
+        <div className="dash-card dash-wide">
+          <h3>实体类型分布</h3>
+          <div className="bar-list">{typeCounts.slice(0, 8).map(([type, count]) => (
+            <div className="bar-row" key={type}><span>{typeLabel(type)}</span><div className="bar-track"><i style={{ width: `${(count / typeTotal) * 100}%` }} /></div><b>{count.toLocaleString()}</b></div>
+          ))}</div>
+        </div>
+        <div className="dash-card dash-wide">
+          <h3>关系类型分布</h3>
+          <div className="bar-list">{relationCounts.slice(0, 8).map(([relation, count]) => (
+            <div className="bar-row" key={relation}><span>{relationLabel(relation)}</span><div className="bar-track purple"><i style={{ width: `${(count / relationTotal) * 100}%` }} /></div><b>{count.toLocaleString()}</b></div>
+          ))}</div>
+        </div>
+        <div className="dash-card">
+          <h3>质量与覆盖</h3>
+          <div className="quality-grid">
+            <div><strong>{graph.documentCount.toLocaleString()}</strong><span>来源文档</span></div>
+            <div><strong>{graph.edges.length ? Math.round((graph.edges.filter((e) => e.evidence.length > 0).length / graph.edges.length) * 100) : 0}%</strong><span>证据覆盖率</span></div>
+            <div><strong>{isolated}</strong><span>孤立节点</span></div>
+            <div className="warning"><strong>{lowQuality.toLocaleString()}</strong><span>待核验知识</span></div>
+          </div>
+          <small className="dash-note">证据覆盖率按带有原文片段的关联三元组计算</small>
+        </div>
+        <div className="dash-card">
+          <h3>核心实体 TOP 5</h3>
+          <div className="core-list">{core.map((n, index) => (
+            <div key={n.id}><em>{String(index + 1).padStart(2, "0")}</em><span>{n.name}<small>{typeLabel(n.type)}</small></span><b>{n.degree}</b></div>
+          ))}</div>
+        </div>
+      </div>
+      <p className="dashboard-footnote">类别覆盖：当前图谱文件未携带文档 category_ids，类别统计需从采集文档索引单独读取。</p>
+    </section>
   );
 }
 

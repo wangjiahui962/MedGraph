@@ -247,14 +247,14 @@ def main() -> int:
 
     ap = argparse.ArgumentParser(description="分层信息抽取")
     ap.add_argument("--limit", type=int, default=0,
-                    help="只抽取前 N 篇文档（按预处理顺序；0=全部）")
+                    help="增量模式下最多检查前 N 篇文档（按预处理顺序；0=全部新增/变化文档）")
     ap.add_argument("--start", type=int, default=0,
                     help="起始偏移：从第 start 篇开始抽取（0 基；配合 --limit 可跑任意区间）")
     ap.add_argument("--workers", type=int, default=DEFAULT_WORKERS,
                     help=f"并发线程数（LLM 调用是网络 IO，>1 可大幅提速；默认 {DEFAULT_WORKERS}，"
                          "可用环境变量 EXTRACT_WORKERS 调整）")
     ap.add_argument("--force", action="store_true",
-                    help="强制全量重抽全部文档（忽略 extract_state 增量指针）")
+                    help="强制全量重抽全部文档（忽略 extract_state 增量指针；会增加 API 消耗）")
     args = ap.parse_args()
 
     if not INPUT.is_file():
@@ -354,6 +354,14 @@ def main() -> int:
             OUTPUT.parent.mkdir(parents=True, exist_ok=True)
             OUTPUT.write_text(json.dumps(dedupe(all_triples), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             print(f"已保存已完成部分的 {len(all_triples)} 条三元组 -> {OUTPUT}", file=sys.stderr)
+        # 本轮尚未完成入库，撤销已标记的文档状态；否则下次会跳过它们而丢失部分结果。
+        if llm_layer.is_available():
+            state_conn.executemany(
+                "DELETE FROM extract_state WHERE document_id = ?",
+                [(rec.get("document_id"),) for rec in candidates if rec.get("document_id")],
+            )
+            state_conn.commit()
+            print("已撤销本轮未入库文档的增量状态，下次将自动重试。", file=sys.stderr)
         state_conn.close()
         return 3
 

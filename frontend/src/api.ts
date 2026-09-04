@@ -67,12 +67,15 @@ export function startExtract(limit = 0): Promise<{ job_id: string }> {
   });
 }
 
-/** 启动“增加新数据”任务：从维基百科搜索新增 count 篇文章并繁体转简体入库。 */
-export function startCollect(count = 5): Promise<{ job_id: string }> {
+/** 启动“增加新数据”任务：采集后默认自动完成抽取并更新图谱。 */
+export function startCollect(
+  count = 5,
+  autoExtract = true,
+): Promise<{ job_id: string }> {
   return request("/api/collect", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ count }),
+    body: JSON.stringify({ count, auto_extract: autoExtract }),
   });
 }
 

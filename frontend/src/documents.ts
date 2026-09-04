@@ -10,10 +10,16 @@ export interface DocumentRecord {
 
 let pending: Promise<Map<string, DocumentRecord>> | null = null;
 
+/** 图谱更新后清除文档索引缓存，确保新采集的来源可以立即展开。 */
+export function clearDocumentsCache() {
+  pending = null;
+}
+
 function loadDocuments(): Promise<Map<string, DocumentRecord>> {
   pending ??= (async () => {
     const response = await fetch(
       `${import.meta.env.BASE_URL}data/documents.json`,
+      { cache: "no-store" },
     );
     if (!response.ok) {
       throw new Error(

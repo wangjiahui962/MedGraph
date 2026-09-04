@@ -74,6 +74,17 @@ CREATE TABLE IF NOT EXISTS triples (
 );
 """
 
+CREATE_TRIPLE_EVIDENCE_TABLE = """
+CREATE TABLE IF NOT EXISTS triple_evidence (
+    id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+    triple_id          INTEGER NOT NULL,
+    source_document_id TEXT,
+    source_text        TEXT,
+    UNIQUE (triple_id, source_document_id, source_text),
+    FOREIGN KEY (triple_id) REFERENCES triples(id) ON DELETE CASCADE
+);
+"""
+
 # 抽取进度表（文档级增量“指针”，放在 documents.db 中）：
 # 记录“已成功抽取过的文档及其内容哈希”，供 extraction/extract.py 增量跳过，
 # 避免每次“提取现有数据”都重复对全部文档调用 LLM。
@@ -114,6 +125,7 @@ def init_triples_db(db_path: Path) -> None:
     db_path.parent.mkdir(parents=True, exist_ok=True)
     with sqlite3.connect(db_path) as conn:
         conn.execute(CREATE_TRIPLES_TABLE)
+        conn.execute(CREATE_TRIPLE_EVIDENCE_TABLE)
         conn.execute("CREATE INDEX IF NOT EXISTS idx_triples_relation ON triples(relation)")
         _migrate_triples(conn)
         conn.commit()

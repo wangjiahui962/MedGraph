@@ -103,6 +103,15 @@ def insert_triples(conn: sqlite3.Connection, triples: list[dict[str, Any]]) -> i
             t.get("confidence", 0.0), t.get("layer", "unknown"),
         )
         cursor = conn.execute(sql, values)
+        triple_id = conn.execute(
+            "SELECT id FROM triples WHERE subject=? AND relation=? AND object=? AND object_type=?",
+            (subject, relation_, object_, t.get("object_type")),
+        ).fetchone()
+        if triple_id:
+            conn.execute(
+                "INSERT OR IGNORE INTO triple_evidence (triple_id, source_document_id, source_text) VALUES (?, ?, ?)",
+                (triple_id[0], t.get("source_document_id"), t.get("source_text")),
+            )
         if cursor.rowcount == 1:
             added += 1
     return added
@@ -139,9 +148,23 @@ def export_triples_json(out_path: Path = DEFAULT_EXPORT) -> int:
     """
     with sqlite3.connect(TRIPLES_DB) as conn:
         rows = conn.execute(
-            f"SELECT {', '.join(EXPORT_FIELDS)} FROM triples"
+            f"SELECT t.id, {', '.join('t.' + f for f in EXPORT_FIELDS)} FROM triples t"
         ).fetchall()
-    records = [dict(zip(EXPORT_FIELDS, row)) for row in rows]
+        evidence = conn.execute(
+            "SELECT triple_id, source_document_id, source_text FROM triple_evidence ORDER BY id"
+        ).fetchall()
+    evidence_by_triple: dict[int, list[tuple[Any, Any]]] = {}
+    for triple_id, doc_id, text in evidence:
+        evidence_by_triple.setdefault(triple_id, []).append((doc_id, text))
+    records: list[dict[str, Any]] = []
+    for row in rows:
+        triple_id, *values = row
+        evs = evidence_by_triple.get(triple_id) or [(values[5], values[6])]
+        for doc_id, source_text in evs:
+            item = dict(zip(EXPORT_FIELDS, values))
+            item["source_document_id"] = doc_id or item["source_document_id"]
+            item["source_text"] = source_text or item["source_text"]
+            records.append(item)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(
         json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8"

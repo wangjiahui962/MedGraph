@@ -22,10 +22,10 @@ npm run preview
 
 `build` 包含 TypeScript 检查，输出 `dist/`。`preview` 通常使用 4173 端口。本工程不自动发布到互联网。
 
-> 顶部“增加新数据 / 提取现有数据”依赖 `python server.py` 提供的 `/api`，只有 `npm run dev` 开发模式会代理 `/api`；`npm run preview` 或构建产物没有该代理，这几个按钮会提示无法连接后端。
+> 顶部“增加并更新图谱 / 提取现有数据”依赖 `python server.py` 提供的 `/api`，只有 `npm run dev` 开发模式会代理 `/api`；`npm run preview` 或构建产物没有该代理，这几个按钮会提示无法连接后端。
 >
-> “增加新数据”走后端 `/api/collect`：从中文维基百科搜索新增文章（顶部可自定义输入篇数，1~100 的任意整数），抓取正文后经 OpenCC
-> 繁体转简体存入 documents.db，此步骤不做 LLM 抽取；随后点“提取现有数据”才会执行 LLM 抽取 → 关键词过滤 → 入库 → 导出前端。
+> “增加并更新图谱”走后端 `/api/collect`：从中文维基百科搜索新增文章（顶部可自定义输入篇数，1~100 的任意整数），抓取正文后经 OpenCC
+> 繁体转简体存入 documents.db，并自动继续执行 LLM 抽取 → 关键词过滤 → 入库 → 导出前端。若只需采集文档，可调用 `/api/collect` 时传 `{"auto_extract": false}`，再单独点击“提取现有数据”。
 
 ## 数据与统计口径
 
