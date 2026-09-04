@@ -858,32 +858,6 @@
     "quality_score": 0.85
   },
   {
-    "document_id": "doc_000067",
-    "category_ids": [
-      "public_health_health_education"
-    ],
-    "title": "军训",
-    "content": "軍訓是一個國家针对其平民学生所实行的军事教育制度，一般由軍隊人员配合各級學校內的課程执行，以達到向下培育軍事人才的目的。 军训旨在建立和完善个人的基础军事能力和素养，在进行国防教育的同时也注重于锻炼个人的纪律性。军训课程可以是自愿或是强制职责，各地对此有着不同的规定。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%86%9B%E8%AE%AD",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:53ed91a01ab5f2a7d2c597accd9653645a0756c6fac470c75c6f78383310a706",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_000068",
-    "category_ids": [
-      "public_health_health_education"
-    ],
-    "title": "体育教育",
-    "content": "体育教育（英語：physical education，缩写P.E.）也称体能教育或运动教育（sports education），是一项在小学、中学和大学中开展的运动教学活动，旨在促进参与者在锻炼身体的活动过程中获得身心全面健康发展。 在不同国家，学校体育教学的任务及目标存在区别。在中国，学校体育是一项贯穿小学一年级到大学二年级的必修课程，其任务可以概括为促进学生身心健康、掌握相应知识和技能、选拔职业竞技后备人才、增强学生组织纪律性、锤炼学生顽强意志等。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E4%BD%93%E8%82%B2%E6%95%99%E8%82%B2",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:622c668b1248cd91c051e426c7b241a533da8eac73b8b1b942a767ce05cace73",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_000069",
     "category_ids": [
       "public_health_health_education"
@@ -1037,19 +1011,6 @@
     "license": "public-info",
     "collected_at": "2026-09-02T01:56:21Z",
     "content_hash": "sha256:8aa99d864d60f05130ed07b0603612d4c682786a86f806684c2801df06311061",
-    "quality_score": 0.95
-  },
-  {
-    "document_id": "doc_000081",
-    "category_ids": [
-      "public_health_health_education"
-    ],
-    "title": "联合国儿童基金会",
-    "content": "联合国儿童基金会（英語：The United Nations Children's Fund）（舊称聯合國國際兒童緊急救援基金會，英語：United Nations International Children's Emergency Fund，简称UNICEF）是聯合國的一個機構，於1946年12月11日在联合国大会上成立，总部設於美國纽约，对发展中国家的母亲和孩子进行长期的人道主义和发展援助。作为一个志愿性的基金机构，联合国儿童基金会依靠政府和私人的捐助。他的项目着重于提高社区服务水平，以提高儿童的健康。联合国儿童基金会在1965年获得了诺贝尔和平奖，而本會亦於1985至87年間成立香港跑馬地分會，現址位於香港島炮台山英皇道75-83號聯合出版大廈。在联合国儿童基金会执行主任Carol Bellamy到期以后，2005年5月由美国前农业部部长担任执行主任，将加速新千年的发展目标提上了议事日程。 联合国儿童基金会是促进建立一个实现儿童权利世界的主要推动力。联合国儿童基金会对全球决策者及基层各类合作伙伴的影响力可将一些富有创意的想法变为现实。这个特性使其有别于其他世界组织和从事儿童工作的组织。联合国儿童基金会相信抚养和关爱儿童是人类发展的基石。联合国儿童基金会就是为了实现这一目的而创立的—与其他机构协力克服贫困、暴力、疾病和歧视给儿童成长之路带来的障碍。联合国儿童基金会认为我们能够携手推进这一人道主义事业。 作为联合国主管儿童问题的机构，联合国儿童基金会在156个发展中和转型中国家开展工作，保障儿童的生存和发展。联合国儿童基金会是世界上最大的为贫穷国家提供疫苗的机构，为确保儿童的健康和达到营养标准，它通过为所有男女孩童提供高质量的基础教育、安全净水和卫生设施以及努力保护儿童免遭暴力、剥削和艾滋病的影响来推进千年发展目标的实现。 注意名稱相似的世界儿童基金会與聯合國兒童基金會或聯合國並無關係。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E8%81%94%E5%90%88%E5%9B%BD%E5%84%BF%E7%AB%A5%E5%9F%BA%E9%87%91%E4%BC%9A",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:63bbd6ea7f56eaf83ae8f0f5db078beaf9cafe85c8619567ca329aa00261fa38",
     "quality_score": 0.95
   },
   {
@@ -1833,97 +1794,6 @@
     "quality_score": 0.95
   },
   {
-    "document_id": "doc_000142",
-    "category_ids": [
-      "public_health_first_aid"
-    ],
-    "title": "作家文摘",
-    "content": "《作家文摘》是中華人民共和國一份文化類報紙，創刊於1993年1月1日，由中國作家協會主管，作家出版集團主辦，該報的版塊分為紀實類、作家類和文學類。 2018年，报纸入选2017年全国百强报纸推荐名单。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E4%BD%9C%E5%AE%B6%E6%96%87%E6%91%98",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:e28e64504732067658b5ddcc31cea2bdcb16e1733224e3cdb957269513f2d8b0",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_000143",
-    "category_ids": [
-      "public_health_first_aid"
-    ],
-    "title": "中国外汇 (杂志)",
-    "content": "《中国外汇》创刊于1993年，是中国大陆金融类半月刊，编辑部位于北京市。 《中国外汇》在2018年被中华人民共和国国家新闻出版广电总局新闻报刊司评为2017年全国“百强报刊”。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E5%A4%96%E6%B1%87_(%E6%9D%82%E5%BF%97)",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:fc1a78e2ceac398775e57173295342436eced739a2ddc354cb56a306c86cdb11",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_000144",
-    "category_ids": [
-      "public_health_first_aid"
-    ],
-    "title": "当代贵州",
-    "content": "《当代贵州》创刊于1995年，是中国大陆政治类周刊，编辑部位于贵州省贵阳市。 《当代贵州》在2018年被中华人民共和国国家新闻出版广电总局新闻报刊司评为2017年全国“百强报刊”。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%BD%93%E4%BB%A3%E8%B4%B5%E5%B7%9E",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:b92933c27bb3b191d6216edb952a54b5f8e9ec43ee7066614d03ea6ce24e8be2",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_000145",
-    "category_ids": [
-      "public_health_first_aid"
-    ],
-    "title": "中国审计",
-    "content": "《中国审计》创刊于1983年，是中国大陆经济类半月刊，编辑部位于北京市。 《中国审计》在2018年被中华人民共和国国家新闻出版广电总局新闻报刊司评为2017年全国“百强报刊”。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E5%AE%A1%E8%AE%A1",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:9fd57c790cbcf98555d8d637e0c4940ef76ff455c41c0546ed26722a132fc933",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_000146",
-    "category_ids": [
-      "public_health_first_aid"
-    ],
-    "title": "中国科学·化学",
-    "content": "《中国科学：化学》创刊于1950年，是中国大陆工程科技类月刊，编辑部位于北京市。此刊物由中国科学院主办。 《中国科学：化学》在2018年被中华人民共和国国家新闻出版广电总局新闻报刊司评为2017年全国“百强报刊”。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%C2%B7%E5%8C%96%E5%AD%A6",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:cb4d8e77b43fd5cc3aed3add9a0c0cdd021fd150c99831ba4830df0c7f26dfd5",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_000147",
-    "category_ids": [
-      "public_health_first_aid"
-    ],
-    "title": "光学学报",
-    "content": "《光学学报》创刊于1981年，是中国大陆基础科学类半月刊，编辑部位于上海市。此刊物由中国光学学会主办。 《光学学报》在2018年被中华人民共和国国家新闻出版广电总局新闻报刊司评为2017年全国“百强报刊”。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%85%89%E5%AD%A6%E5%AD%A6%E6%8A%A5",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:63b1a3d6b52617a20894ae331635c8ed12c3c1f360f513289639acd9a537c76c",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_000148",
-    "category_ids": [
-      "public_health_first_aid"
-    ],
-    "title": "中国水稻科学",
-    "content": "《中国水稻科学》创刊于1986年，是中国大陆农业科技类双月刊，编辑部位于浙江省杭州市。此刊物由中国水稻研究所主办。 《中国水稻科学》在2018年被中华人民共和国国家新闻出版广电总局新闻报刊司评为2017年全国“百强报刊”。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E6%B0%B4%E7%A8%BB%E7%A7%91%E5%AD%A6",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:33f81164e1cd9569ebbdfc8cbb2a8b06d4ff4828966917dd770e13919f290c55",
-    "quality_score": 0.85
-  },
-  {
     "document_id": "doc_000149",
     "category_ids": [
       "public_health_first_aid"
@@ -1934,19 +1804,6 @@
     "license": "public-info",
     "collected_at": "2026-09-02T01:56:21Z",
     "content_hash": "sha256:9f202606c768755b0708f4dd44549e09575994e5d388828eef8ec3a278393b34",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_000150",
-    "category_ids": [
-      "public_health_first_aid"
-    ],
-    "title": "国家科学评论",
-    "content": "《国家科学评论》创刊于2014年，是中国大陆基础科学类月刊，编辑部位于北京市。此刊物由中国科技出版传媒股份有限公司主办。 《国家科学评论》在2018年被中华人民共和国国家新闻出版广电总局新闻报刊司评为2017年全国“百强报刊”。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%9B%BD%E5%AE%B6%E7%A7%91%E5%AD%A6%E8%AF%84%E8%AE%BA",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:ce442088fd052749cebd0719efede24acb1341645380268221231b229af13280",
     "quality_score": 0.85
   },
   {
@@ -8567,19 +8424,6 @@
     "quality_score": 0.95
   },
   {
-    "document_id": "doc_000660",
-    "category_ids": [
-      "cardiovascular_atherosclerosis"
-    ],
-    "title": "刘国庆 (生物学家)",
-    "content": "刘国庆，生物学家，北京大学教授，研究方向为长期从事脂代谢紊乱和动脉粥样硬化研究等。国际动脉粥样硬化学会中国分会主席，多个国际期刊编委，中国教育部第四批“长江学者”特聘教授。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%88%98%E5%9B%BD%E5%BA%86_(%E7%94%9F%E7%89%A9%E5%AD%A6%E5%AE%B6)",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:945a554265886815eaa998d6bd269937dfe7aa2d35b91ed17b2bc78fd99483e9",
-    "quality_score": 0.85
-  },
-  {
     "document_id": "doc_000661",
     "category_ids": [
       "cardiovascular_atherosclerosis"
@@ -14794,19 +14638,6 @@
     "quality_score": 0.85
   },
   {
-    "document_id": "doc_001139",
-    "category_ids": [
-      "rheumatology_ankylosing_spondylitis"
-    ],
-    "title": "信徒 (歌曲)",
-    "content": "《信徒》（英語：Believer）是美國搖滾組合謎幻樂團的歌曲，作爲他們的第三張錄音室專輯《超進化》的首發主打單曲，由新視鏡唱片和Kidinakorner發行于2017年2月1日，由丹·雷诺兹、韋恩·瑟蒙、本·麥基、丹尼爾·普拉茨曼、賈斯汀·特蘭特和製作人馬特曼和羅賓共同创作。 《信徒》最高美國《告示牌》Hot 100榜第四位，是繼歌曲《放射能量》和《惡魔》之後組合的第三首位居排行榜前十位的歌曲，同時在奧地利、加拿大、捷克、法國、意大利、波蘭、葡萄牙和瑞士的音樂排行榜中位居前十位。歌曲被大量運用在任天堂Switch的廣告以及多個電影預告片和電視節目中。歌曲成為2017年美國第五首最暢銷的歌曲。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E4%BF%A1%E5%BE%92_(%E6%AD%8C%E6%9B%B2)",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:6266b224f193de5305130505615a5d00d0dcc0a594741444cfb070429740a491",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_001140",
     "category_ids": [
       "rheumatology_ankylosing_spondylitis"
@@ -15730,19 +15561,6 @@
     "quality_score": 0.95
   },
   {
-    "document_id": "doc_001211",
-    "category_ids": [
-      "neurology_alzheimer"
-    ],
-    "title": "欧洲花样滑冰锦标赛",
-    "content": "欧洲花样滑冰锦标赛（European Figure Skating Championships）由國際滑冰總會（ISU）主辦的欧洲顶级花样滑冰赛事之一，它与冬季奥运会、世界锦标赛、四大洲锦标赛平级，每年举办一次。它為ISU錦標賽中歷史最悠久的。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E6%AC%A7%E6%B4%B2%E8%8A%B1%E6%A0%B7%E6%BB%91%E5%86%B0%E9%94%A6%E6%A0%87%E8%B5%9B",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:aeed2841d0f80b653c478125b72e68995b272b3cb67faa5dfa098a3a013570e6",
-    "quality_score": 0.85
-  },
-  {
     "document_id": "doc_001212",
     "category_ids": [
       "neurology_alzheimer"
@@ -15805,19 +15623,6 @@
     "license": "public-info",
     "collected_at": "2026-09-02T01:56:21Z",
     "content_hash": "sha256:9634ac7c49adb822f6882b3b38ae2d3a83304bc5a19ed3f79b3d86a6db638769",
-    "quality_score": 0.95
-  },
-  {
-    "document_id": "doc_001217",
-    "category_ids": [
-      "neurology_alzheimer"
-    ],
-    "title": "漫长的告别 (中岛京子)",
-    "content": "《漫长的告别》（日語：長いお別れ）是日本女作家中岛京子所创作的短篇小说集。这部短篇集讲述了一位罹患阿尔兹海默症的父亲在患病的十年内逐渐遗忘自己身为父亲和丈夫的记忆及从他家庭慢慢消失的故事。故事本身虽然是虚构的，但是作者中岛京子在创作时参考了自己与父亲中岛昭和的告别经验。中岛昭和在2004年罹患阿尔兹海默症并于2013年辞世。根据小说改编的电影已于2019年在日本公映。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E6%BC%AB%E9%95%BF%E7%9A%84%E5%91%8A%E5%88%AB_(%E4%B8%AD%E5%B2%9B%E4%BA%AC%E5%AD%90)",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:99c8db6bfc5d3f532d424a7524f232d35c33a19ab6b55c2d64d04d51c4007749",
     "quality_score": 0.95
   },
   {
@@ -16172,19 +15977,6 @@
     "quality_score": 0.85
   },
   {
-    "document_id": "doc_001245",
-    "category_ids": [
-      "neurology_parkinson"
-    ],
-    "title": "斯蒂芬·邓恩 (美国诗人)",
-    "content": "斯蒂芬·埃利奥特·邓恩（英語：Stephen Elliot Dunn，1939年6月24日—2021年6月24日）是美国诗人和教育家，他共计创作出版了15部诗集。凭借其于2001年发表的诗集《不同的时光（Different Hours）》而获得了普利策诗歌奖及美国艺术暨文学学会所颁发的学院文学奖。除此之外，邓恩还获得了国家艺术基金会创意写作奖（National Endowment for the Arts Creative Writing Fellowships）、古根海姆奖和洛克菲勒基金会奖（Rockefeller Foundations Fellowship）。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E6%96%AF%E8%92%82%E8%8A%AC%C2%B7%E9%82%93%E6%81%A9_(%E7%BE%8E%E5%9B%BD%E8%AF%97%E4%BA%BA)",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:46261fcd9e34cdce8ca9abd6f7927077318efb41084cd0cdb3c57ed16748bdfe",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_001246",
     "category_ids": [
       "neurology_parkinson"
@@ -16417,19 +16209,6 @@
     "collected_at": "2026-09-02T01:56:21Z",
     "content_hash": "sha256:69aeabf9a66f20bb9f9d0b23e7debb1d5f8dd50c89deb6eaf8a6258eb2d78719",
     "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_001264",
-    "category_ids": [
-      "neurology_epilepsy"
-    ],
-    "title": "斐迪南一世 (奥地利皇帝)",
-    "content": "奥地利皇帝斐迪南一世（德語：Ferdinand I, Kaiser von Österreich，1793年4月19日—1875年6月29日），同時為匈牙利和波西希米亞國王斐迪南五世（Ferdinand V）。1835年起为奥地利皇帝和匈牙利国王、德意志邦聯主席，直到1848年革命时退位。由于他消极但善意的性格，他获得了“良善” （ 德语： Der Gütige）或“仁慈的斐迪南”（捷克语：Ferdinand Dobrotivý，波兰语：Ferdynand Dobrotliwy）。但也被嘲笑为完蛋的古迪南（德语：Gütinand der Fertige）",
-    "source_url": "https://zh.wikipedia.org/wiki/%E6%96%90%E8%BF%AA%E5%8D%97%E4%B8%80%E4%B8%96_(%E5%A5%A5%E5%9C%B0%E5%88%A9%E7%9A%87%E5%B8%9D)",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:e84f1da3a80eea1264789c049c44e9d3caa972bbe64b279625aaa8ee7e74f593",
-    "quality_score": 0.95
   },
   {
     "document_id": "doc_001265",
@@ -19266,19 +19045,6 @@
     "quality_score": 0.95
   },
   {
-    "document_id": "doc_001483",
-    "category_ids": [
-      "infectious_dengue"
-    ],
-    "title": "孙春兰",
-    "content": "孙春兰（1950年5月—），汉族，河北饶阳人，生于辽宁沈阳，原副国级领导人，1969年11月参加工作，1973年5月加入中国共产党，毕业于鞍山市工业技术学校（今辽宁科技大学），中共中央党校在职研究生学历。其早年曾做过工人，后成为工厂、工会主要领导并进入政界。是中共第十五、十六届中央候补委员，第十七届中央委员，第十八届、十九届中央委员及中央政治局委员。现任国际儒学联合会会长。 自2000年起，曾历任中共辽宁省委副书记兼大连市委书记，中华全国总工会党组书记、副主席、书记处第一书记，中共福建省委书记，中共天津市委书记，中共中央统战部部长等职务。2018年3月至2023年3月任中华人民共和国国务院副总理，分管妇女儿童、教育、医疗卫生、体育、退役军人事务等事务，任内作为负责官员处置了新型冠状病毒肺炎疫情在中国的一系列爆发及善后事宜。 孙春兰是继萬紹芬之后，中共第二位担任省级党委书记的女性（福建省、天津市）。亦为中华人民共和国成立后的第五位女性国务院副总理，前面四位分别为吴桂贤、陈慕华、吴仪、刘延东。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%AD%99%E6%98%A5%E5%85%B0",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:9f37db7b78c021c1876bc6eabd35fd731b3098a6a6d35f81d8789982507ca1a0",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_001484",
     "category_ids": [
       "infectious_dengue"
@@ -19562,19 +19328,6 @@
     "license": "public-info",
     "collected_at": "2026-09-02T01:56:21Z",
     "content_hash": "sha256:9f108d3a6678a630fd4ab1d16de73b4888ee957622de20c4b9882cc408ff133a",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_001506",
-    "category_ids": [
-      "infectious_dengue"
-    ],
-    "title": "登革热 (乐队)",
-    "content": "登革热（Dengue Fever）是一支来自洛杉矶的美国乐队，其乐曲结合了1960和1970年代的柬埔寨流行乐、迷幻音乐以及其他世界音乐的风格。他们的最新专辑《Ting Mong》发行于2023年9月。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E7%99%BB%E9%9D%A9%E7%83%AD_(%E4%B9%90%E9%98%9F)",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:a5ad7034f66617528b3fc1b3c6548005751f99e6a086680b7f21fd6eaf6aa3c2",
     "quality_score": 0.85
   },
   {
@@ -21515,19 +21268,6 @@
     "quality_score": 0.95
   },
   {
-    "document_id": "doc_001656",
-    "category_ids": [
-      "surgery_appendicitis"
-    ],
-    "title": "高君宇",
-    "content": "高君宇（1896年10月22日—1925年3月5日），名尚德，字锡三，号君宇，山西省静乐县峰岭底村（今属娄烦）人。中国共产党和中国共产主义青年团的早期领导人之一。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E9%AB%98%E5%90%9B%E5%AE%87",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:c6ffb9999d60861cee43b553486cda17302b1d375fd97cca4a631120d6d05093",
-    "quality_score": 0.85
-  },
-  {
     "document_id": "doc_001657",
     "category_ids": [
       "surgery_appendicitis"
@@ -22022,19 +21762,6 @@
     "quality_score": 0.95
   },
   {
-    "document_id": "doc_001695",
-    "category_ids": [
-      "surgery_burn"
-    ],
-    "title": "国防大学霸凌致死案",
-    "content": "国防大学霸凌致死案是一宗於2017年5月21日至22日凌晨发生於马来西亚的虐待谋杀案，受害人是当时就讀於马来西亚国防大学（UPNM）海军系的在籍学生兼见习军官祖尔法汉奥斯曼祖尔卡南（馬來語：Zulfarhan Osman Zulkarnain，生于1996年11月29日，简称祖尔法汉），他被一群同学认定偷取笔记型电脑后遭到捆绑及毒打，身体有约90处被蒸汽熨斗烫伤，全身80%出现瘀伤和烧伤的痕迹，之後于6月1日在雪州沙登医院不治，得年20岁。本案因為作为一宗发生於宿舍环境中的极端欺凌事件而引起全国关注。 本案於四年后的2021年11月2日由马来西亚高等法院頒布判决，、裁决这6人抵触刑事法典第304条文(误杀)、第330条（刑讯逼供致伤罪）的罪名成立，处以18年监禁。另外17名同黨蓄意致伤罪名成立被判处三年有期徒刑（刑事法典第34条），刑罚即日執行；2024年7月 23日，控方上诉，重申并确认所有六名嫌疑人谋杀罪名成立，并判处死刑。尽管马来西亚已废除强制性死刑，并实施了监禁替代刑罚，但法官认为，鉴于伤人的方式不同寻常，死刑是唯一合理的惩罚。 六名被裁定謀殺罪成的主謀，随即向馬來西亞聯邦法院提出上訴。 2025年2月28日，联邦法院恢复高庭原判，将六名被告的谋杀罪改为误杀罪，死刑改为判处监禁18年，一致批准六名被告的上诉，推翻上诉庭2024年7月23日宣判六名被告谋杀罪成并处于死刑的裁决。三司认为，控方的关键证人——沙登医院法医专家沙曼的证词出现矛盾。控方无法在排除合理怀疑的情况下，证明死者的伤势导致他死亡，况且死者是在案发的10天后才去世。尽管谋杀罪不成立，但法官认为6 名被告故意用熨斗烫伤祖法汉并殴打他，这一点已在两名国防大学学员的证人阿末瑟纳比和沙菲克的证词中获得证实。 该国防大学后因此事而臭名昭著，被坊间称为“地狱学校”、“监狱学校”等浑名。该事件同时也被比喻为马来西亚版的洪仲丘事件以及尹一兵事件（2014年涟川韩军虐兵案）。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%9B%BD%E9%98%B2%E5%A4%A7%E5%AD%A6%E9%9C%B8%E5%87%8C%E8%87%B4%E6%AD%BB%E6%A1%88",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:ec1b2569e12c70fb09e592a8a276fdea1ccfb60c0a96b7e54a839d1c40a74cd3",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_001696",
     "category_ids": [
       "surgery_burn"
@@ -22087,19 +21814,6 @@
     "quality_score": 0.95
   },
   {
-    "document_id": "doc_001700",
-    "category_ids": [
-      "surgery_burn"
-    ],
-    "title": "海城大地震",
-    "content": "海城大地震是1975年2月4日19点36分发生于中华人民共和国辽宁省海城、营口县一带（东经122°50'，北纬40°41'），震級為黎克特制7.3级，矩震级7.0级，震源深度为16－21公里的地震。由于預先疏散，几乎没人直接死于地震。然而因震后防震棚失火，导致341人被烧死，980人被烧伤。加之简陋的防震棚难以御寒，又导致372人被冻死，6,578人被冻伤。 除此之外，地震亦波及朝鮮半島全境，造成部分房屋損毀，人員受傷，部分區域停電。日本九州島的佐賀市、熊本市和大分市以及蘇聯濱海邊疆區也有輕微震感。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E6%B5%B7%E5%9F%8E%E5%A4%A7%E5%9C%B0%E9%9C%87",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:d65e8db27beed6fc0cd73f013d9bf14e9dded65a94ebb7483479ba942b748dbc",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_001701",
     "category_ids": [
       "surgery_burn"
@@ -22110,19 +21824,6 @@
     "license": "public-info",
     "collected_at": "2026-09-02T01:56:21Z",
     "content_hash": "sha256:1b3148368a90f10f51d8cc0e31b5c1e2657e924ddfa623bbd702bb61c19fc588",
-    "quality_score": 0.95
-  },
-  {
-    "document_id": "doc_001702",
-    "category_ids": [
-      "surgery_burn"
-    ],
-    "title": "曲波 (作家)",
-    "content": "曲波，原名曲清涛，男，籍贯 山东黄县（今龙口市凤仪区枣林庄），中國现代作家。曾任中国作家协会第三、四届理事，第五、六届名誉委员，铁路文联副主席。代表作品：传奇长篇小说《林海雪原》 曾被译成英文、俄文、日文、蒙古文、朝鲜文、越南文、挪威文、阿拉伯文等多种版本，并多次被改编成电影、京剧、音乐剧和电视节目， 如电影《智取威虎山》。曲波作品包括长篇小说， 短篇小说， 散文， 特写， 诗歌等",
-    "source_url": "https://zh.wikipedia.org/wiki/%E6%9B%B2%E6%B3%A2_(%E4%BD%9C%E5%AE%B6)",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:6c38b565ec8ade2e106e3292047ef791cef6a97f3f5710b81a498268dc01f517",
     "quality_score": 0.95
   },
   {
@@ -22189,19 +21890,6 @@
     "collected_at": "2026-09-02T01:56:21Z",
     "content_hash": "sha256:64bbb43ae181c6e15244bbc52885533b3452f3020ccdddb4ce5c1fd6ae427d9a",
     "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_001708",
-    "category_ids": [
-      "surgery_burn"
-    ],
-    "title": "艾因迪亚卜赛道",
-    "content": "艾因迪亚卜赛道是1957年建成的一条位于摩洛哥艾因迪亚卜的西南部的一级方程式公路赛道。赛道使用现有的海岸公路以及从卡萨布兰卡到艾宰穆尔的主要公路。在1957年之前，首先是安法赛道作为摩洛哥大奖赛的赛道，后来又移到了阿加迪尔。 这条7.618千米长的赛道是由摩洛哥皇家汽车俱乐部设计的，并得到了穆罕默德五世的祝福。赛道的建设只用了六周。这里举办了1957年的一场F1比赛，但只是一场非锦标赛赛事。1958年10月19日赛道举办了1958年一级方程式赛季的最后一场比赛，1958年摩洛哥大奖赛。比赛的胜者是范沃尔车队的斯特林·莫斯，用时2小时9分15.1秒完成了53圈的比赛。 比赛中发生了一场严重的事故，斯图尔特·刘易斯-埃文斯的赛车打滑并撞毁，他遭到严重烧伤，六天后死于英格兰的一家医院。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E8%89%BE%E5%9B%A0%E8%BF%AA%E4%BA%9A%E5%8D%9C%E8%B5%9B%E9%81%93",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:3b3152967e1ca0b455ab51507f77f45c1ddb097e31c592de9c8836bf3c110732",
-    "quality_score": 0.95
   },
   {
     "document_id": "doc_001709",
@@ -22292,19 +21980,6 @@
     "license": "public-info",
     "collected_at": "2026-09-02T01:56:21Z",
     "content_hash": "sha256:353b14d0bd502794da1b6b91a4b8f2b1465c9e88ca78d401f57fa5c5d24fd95d",
-    "quality_score": 0.95
-  },
-  {
-    "document_id": "doc_001716",
-    "category_ids": [
-      "surgery_organ_transplant"
-    ],
-    "title": "對中國共產黨摘取法輪功學員及良心犯器官的指控",
-    "content": "中國共產黨政府（特別是政法委員會、解放軍軍委等部門）被獨立調查者指控大規模系統性活體摘取良心犯的器官，供商業性移植給中國人或外國人謀利，被害者因此死亡，主要對象是遭關押的法轮功修煉者，以及部分其他宗教及少數民族團體成員，這些人士被長期關押在監獄或勞教所等场地做為器官供體的來源。最主要的獨立調查為大衛·喬高和大衛·麥塔斯所做《 關於指控中共摘取法轮功學員器官的調查報告》（英語：Revised Report into Allegations of Organ Harvesting of Falun Gong Practitioners in China）。聯合國禁止酷刑委員會於2015年12月9日要求對中华人民共和国政府強摘包括法輪功學員器官的指控進行獨立調查，聯合國特別報告員海納‧比勒費爾特公開譴責中国政府活摘法輪功學員在內的人體器官。 目前Pubmed資料庫中有由實際參與器官移植的醫師所撰寫的文章認為強摘法輪功學員器官的指控是可信的论文；此外，該指控的内容連續多年被列入聯合國及美國國務院、美國國會等機構的人權報告書。中華民國立法院（2012年12月）、歐洲議會（2013年12月、2016年7月第二度）、澳洲參議院（2013年3月）、義大利參議院人權委員會、愛爾蘭議會外交事務及貿易聯合委員會、美國國會外交委員會（2014年7月底281號決議案）、美國眾議院2016年通過343號決議案再度譴責並要求美國國務院徹查並採取行動、加拿大國會國際人權委員會（2014年12月），陸續通過決議譴責中华人民共和国政府強摘法轮功修煉者等良心犯器官。歐盟通過歐洲理事會反對人體器官販運公約，以色列、西班牙、台灣陸續完成立法禁止到中國大陆器官移植旅遊。 2024年7月，來自黑龍江省的法輪功學員程佩明在美國華府的新聞發布會上親身講述2004年被關押在黑龍江省大慶監獄時，自己部分器官被中共強迫摘取而倖存的經歷，該次手術留下長達35公分的胸腔切口疤痕，當中共試圖進行第二次活摘器官時，程佩明趁機逃離醫院 。2020年到美國之後，接受9次不同的醫學影像檢查，檢查結果經至少十名多國專家證實，確定程佩明的肝臟左葉及部分肺臟已被切除，且有證據證明手術時間可追溯至2004年。評論認為，強摘器官罪行的調查難度非常大，被害人通常術後死亡。 2023年，逃離中國多年的軍醫鄭治以見證者身分，揭露1994年間他在瀋陽陸軍總醫院實習時所親歷的活摘現場，當時被活摘的是一位不滿18歲的年輕軍人，四肢與脖子被細繩捆住後，在不施打麻藥的情況下從劍突下作大切口一直劃到臍部，打開腹腔直接摘取腎臟，接著是眼球。鄭治因過於震驚無法下手，全程由高階軍醫迅速完成，由於親眼見到年輕生命遭到虐殺，鄭治多年來一直處於恐懼中。鄭治參與紀錄片《國有器官》的拍攝，親自在鏡頭前述說這段經歷。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%B0%8D%E4%B8%AD%E5%9C%8B%E5%85%B1%E7%94%A2%E9%BB%A8%E6%91%98%E5%8F%96%E6%B3%95%E8%BC%AA%E5%8A%9F%E5%AD%B8%E5%93%A1%E5%8F%8A%E8%89%AF%E5%BF%83%E7%8A%AF%E5%99%A8%E5%AE%98%E7%9A%84%E6%8C%87%E6%8E%A7",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:0073514d583ba95bbb76869049a20a8ed9b63682f66217de399177ba24f60b49",
     "quality_score": 0.95
   },
   {
@@ -25870,19 +25545,6 @@
     "quality_score": 0.95
   },
   {
-    "document_id": "doc_001991",
-    "category_ids": [
-      "pediatrics_autism"
-    ],
-    "title": "光 (2018年电影)",
-    "content": "《光》（英文：Guang）是一部2018年马来西亚华语剧情片。本片講述一名自閉症成人男生的故事。他在尝试寻找工作的当儿，开始收集起了玻璃容器，一个隐藏的音乐天赋在慢慢展露。 本片由郭修篆执导；庄仲维、张顺源、陈子颖主演，并获得好評。 本片于2020年11月6日在中国上映。 本片之前于2018年11月29日在马来西亚上映，2019年分别在新加坡、香港、台湾上映。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%85%89_(2018%E5%B9%B4%E7%94%B5%E5%BD%B1)",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:073f4faecbd7c247b45a9eb40a7925eaefe7249e5c8cd8dea5e51b0a74aa4847",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_001992",
     "category_ids": [
       "pediatrics_autism"
@@ -26803,19 +26465,6 @@
     "license": "public-info",
     "collected_at": "2026-09-02T01:56:21Z",
     "content_hash": "sha256:cd6ce84acae544ba62191ef7245ccabf9c286f0cf7f8a2d5dfc5b2664f290668",
-    "quality_score": 0.95
-  },
-  {
-    "document_id": "doc_002063",
-    "category_ids": [
-      "dermatology_psoriasis"
-    ],
-    "title": "阿维马埃尔·古斯曼",
-    "content": "曼努埃尔·鲁本·阿维马埃尔·古斯曼·雷诺索（西班牙語：Manuel Rubén Abimael Guzmán Reynoso；1934年12月3日—2021年9月11日），党名贡萨罗主席（Presidente Gonzalo，西班牙語發音：[pɾesiˌdente ɡonˈsalo]）、贡萨罗同志、胡安同志（联系海外盟友用）等，是秘鲁哲學家、毛主义游击队领袖和恐怖分子。他出身秘鲁大学哲学系教授，1970年创立了秘魯共產黨（PCP-SL，俗稱「光辉道路」），並武裝對抗政府。他随后因为恐怖主义和叛国被捕，並判处终身监禁。 古斯曼大约在20岁时加入了共产党。在1960年代和1970年代，古斯曼受到了马克思主义、列宁主义和毛主义的强烈影响并以一名哲学教授为身份活跃于极左政治。他发展了以原住民夺权为基础的武装斗争的贡萨罗思想和血液配额思想，并建立了新民主主义共和国。他在1960年代中期转入地下，组织了秘魯共產黨“光辉道路”，于1980年5月领导开始武装斗争。光辉道路被美国政府、加拿大政府和欧盟认定为恐怖组织；前两个国家还禁止其公民向该组织提供资金或其他经济支持。 古斯曼被捕後，根据官方说法，他在狱中起初大力推行“和平协议 (秘鲁)”以重建党，但在2000年废止了“和平协议 (秘鲁)”，采取了“政治解决方案”的新策略，目的在于废除反颠覆法律，并使自己获释。2003年，秘鲁宪法法院推翻了前總統藤森謙也推動的判决，裁定那些授权秘密审判的总统令违宪。2005年9月至2006年10月期间进行了新的审判，并在2014年进行了最后一次审判，最终他被判处终身监禁。2021年，古斯曼在卡亚俄海军基地最高安全级别监狱服刑期间因牛皮癣逝世，享年86岁。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E9%98%BF%E7%BB%B4%E9%A9%AC%E5%9F%83%E5%B0%94%C2%B7%E5%8F%A4%E6%96%AF%E6%9B%BC",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:f00f0e16ba3034c1d9b8df116da2acd283a532db24748dfed5ce8b3e66b3d00a",
     "quality_score": 0.95
   },
   {
@@ -28142,19 +27791,6 @@
     "license": "public-info",
     "collected_at": "2026-09-02T01:56:21Z",
     "content_hash": "sha256:b056ab85b7109e9d33226954452122a4a33f76d6b9afe8f629c6a57f9e0a662e",
-    "quality_score": 0.95
-  },
-  {
-    "document_id": "doc_002166",
-    "category_ids": [
-      "ophthalmology_cataract"
-    ],
-    "title": "毛泽东",
-    "content": "毛泽东（1893年12月26日—1976年9月9日），字润之，湖南湘潭人，中国近代马列主义理论家、革命家、政治家、军事战略家与诗人。1943年成为中共最高领导人、1949年成为中华人民共和国最高领导人，是中国共产党、中国人民解放军和中华人民共和国的缔造者之一。 毛泽东生于农民家庭，早年入私塾，1918年毕业于湖南省立第一师范学校，1920年在湖南创建中共早期组织，次年出席中共一大。1923年，毛泽东在中共三大上被选为中央执行委员，进入中共领导层。第一次國共合作期間，曾任中國國民黨一、二届中央候补执委，中国国民党中央宣传部代理部长等要職。1927年第一次国共合作破裂，他领导秋收起义，后率部上井冈山，开创首个农村革命根据地。1931年，他参与创建中华苏维埃共和国，并担任中央执行委员会主席。期间，他率部参与第一次国共内战，并于1934年同中央红军参与长征。1935年，毛泽东在遵义会议上被选为中共中央政治局常委。1936年后，他担任中华苏维埃共和国中央革命军事委员会主席，领导中共军队参与抗日战争。1942年，毛泽东发动延安整风运动，并于次年担任中共中央政治局主席，成为中共主要领导人。毛泽东以后在历届中央委员会上都连续当选为中央委员会主席，直至1976年逝世。 中国抗日战争结束后，他领导中共军队打赢第二次国共内战，令中华民国政府敗退台灣。1949年至1959年，毛泽东先后担任中华人民共和国中央人民政府主席、中华人民共和国主席。此外，他还先后兼任过中央人民政府人民革命军事委员会主席、中华人民共和国国防委员会主席、中国人民政治协商会议全国委员会主席等职。 中华人民共和国成立后，毛泽东先后主导发起了土地改革运动、社会主义改造、人民公社化运动等，对内推行计划经济，并参与规划了两弹一星、三线建设等方略，大幅推动中国大陆的军事、工业与基础设施建设。与此同时，毛泽东等人在中国大陆展开扫盲运动，制定《五四宪法》，并于1970年代初期开始实行计划生育。此外，毛泽东亦主导发动了一系列颇具争议的政治运动（如镇反运动、三反五反运动、肃反运动、反右运动、大跃进、反右倾运动、四清运动、文化大革命等），推行个人崇拜；据多方估计，1949年至1976年间，因上述政治运动以及三年大饥荒等灾祸，中国大陆的非正常死亡人数达到4000万至8000万。外交上，毛泽东曾提出三个世界理论与“深挖洞、广积粮、不称霸”等思想，介入朝鲜战争、越南战争等冷战期间的重大历史事件。 毛泽东的一生对中国乃至全球影响深远，其思想亦被毛主义者广泛传播，然而世界各地对毛泽东的评价两极分化、褒贬不一。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E6%AF%9B%E6%B3%BD%E4%B8%9C",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:da6ed0b6576265436fdbbba622510d55d3cb6da49708431ff63f3f01be372d46",
     "quality_score": 0.95
   },
   {
@@ -31431,19 +31067,6 @@
     "license": "public-info",
     "collected_at": "2026-09-02T01:56:21Z",
     "content_hash": "sha256:a749e0de804a6561a57891b3c69c9ef1d451c87071c8ce03edddcf5067c574e8",
-    "quality_score": 0.95
-  },
-  {
-    "document_id": "doc_002419",
-    "category_ids": [
-      "rehabilitation_therapy"
-    ],
-    "title": "适应性体育活动",
-    "content": "适应性体育活动（Adapted physical activity），其定义可以非常广泛，但主要是指为不同个体的特殊要求提供改良的体育活动。“适应性”指的是修改的，更正的，根据评价数据做出相应变化的。不同个体，主要指的是某些身体功能受损的人，残疾人，或者其他有特殊需求的人群，当然也可包括老年人。世界适应性体育活动协会于1973年在加拿大魁北克地区成立，同时也设有多个分部。 在法国，此专业毕业生主要服务于青少年残疾人教育机构，成年残疾人托养机构，功能康复中心（作为体育教练与物理治疗师作业治疗师等合作进行康复治疗），老年公寓等。此专业设在体育技术学院下，开设此专业的大学主要有里尔第二大学，普瓦捷大学，雷恩大学，里昂第一大学，土伦大学，巴黎第五大学，巴黎第十一大学等。但由于法国本科阶段只有三年，而且前两年采取统一上课，到第三年才分开体育管理，体育教育和适应性体育活动，所以本科学位的含金量并不高。 在中国，目前还没有相应的本科专业，而且，真正的适应性体育活动也没有开展起来，这主要还是与经济水平有关，残疾人的基本温饱还不能得到保证的情况下，体育活动就被忽略了。 适应性体育活动可以是普通的体育活动，但大多数是被改良的体育活动，比如轮椅篮球、盲人舞蹈、坐式排球等。 北京残奥会的比赛项目有20个大项，即射箭、田径、硬地滚球、自行车、马术、5人制足球、7人制足球、盲人门球、盲人柔道、举重、赛艇、帆船、射击、游泳、乒乓球、坐式排球、轮椅击剑、轮椅篮球、轮椅橄榄球和轮椅网球。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E9%80%82%E5%BA%94%E6%80%A7%E4%BD%93%E8%82%B2%E6%B4%BB%E5%8A%A8",
-    "license": "public-info",
-    "collected_at": "2026-09-02T01:56:21Z",
-    "content_hash": "sha256:79661960fa42c31306791e8dd547e4ade0ce6b17d54416529c18aafa5482f974",
     "quality_score": 0.95
   },
   {
@@ -35074,19 +34697,6 @@
     "quality_score": 0.85
   },
   {
-    "document_id": "doc_002699",
-    "category_ids": [
-      "neurology_stroke"
-    ],
-    "title": "任內逝世的國家元首與政府首腦列表",
-    "content": "本条目列出任內逝世的國家元首與政府首腦，也包括最高领导人。一般情况下，世袭公职人员（国王、王后、皇帝、埃米尔等）和享有终身任期的公职人员（教皇、终身总统等）不会被收录在此。 死亡大多是自然的，但因暗杀、处决、自杀、事故身亡甚至战死的国家领导人也会收录在其中。 该列表按时间顺序排列。首先列出姓名，然后是逝世年份、国家、死亡时所任职位、逝世地点（如果已知）和死因。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E4%BB%BB%E5%85%A7%E9%80%9D%E4%B8%96%E7%9A%84%E5%9C%8B%E5%AE%B6%E5%85%83%E9%A6%96%E8%88%87%E6%94%BF%E5%BA%9C%E9%A6%96%E8%85%A6%E5%88%97%E8%A1%A8",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:2f595e14255dab5aea7f81fa59c2f0287340961d5095f21e2bd97dfcbfaa24e1",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_002700",
     "category_ids": [
       "neurology_stroke"
@@ -36673,19 +36283,6 @@
     "quality_score": 0.85
   },
   {
-    "document_id": "doc_002822",
-    "category_ids": [
-      "oncology_prostate_cancer"
-    ],
-    "title": "康生",
-    "content": "康生（1898年—1975年12月16日），原名张宗可，字少卿（绍卿），乳名張旺，曾化名趙容、張溶、张耘，笔名鲁赤水，山東諸城人，中国共产党和中华人民共和国政治人物、书法家，原正国级领导人。 康生曾擔任中共中央政治局常委、中共中央副主席、全國人大常委會副委員長、全國政協副主席等職務。他也是支持文化大革命的關鍵人物，曾任中央文革小組顧問。康生死於文革期間，文革結束後被列為林彪、江青反革命集团主犯，并被开除党籍。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%BA%B7%E7%94%9F",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:bc740533e6f7c63e7418f84666c5d89a31dd4db7954a99aafff44b70e4504c51",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_002823",
     "category_ids": [
       "oncology_prostate_cancer"
@@ -37661,19 +37258,6 @@
     "quality_score": 0.85
   },
   {
-    "document_id": "doc_002898",
-    "category_ids": [
-      "orthopedics_fracture"
-    ],
-    "title": "2004年美国大奖赛",
-    "content": "2004年美國大奖赛（英語：2004 United States Grand Prix），官方名稱為2004年一級方程式美國大獎賽（英語：2004 Formula 1 United States Grand Prix），是2004年6月20日舉辦於美國的一場一級方程式賽事。比賽在印第安納波利斯賽道進行，總計73圈。這是2004年世界一級方程式錦標賽的第九場大獎賽。 該站比賽起步後不久即發生嚴重意外，共牽涉五位車手，其中四位更因此被迫退賽。麥可·舒馬克在安全車離開後，把握機會超越隊友鲁本斯·巴里切罗，搶上第一位。儘管後續巴里切罗嘗試奪回領先位置，但以失敗告終。最終由舒馬克贏得今季第八個分站冠軍。佐藤琢磨同时也成为第二位站上颁奖台的日本籍車手。 本賽事發生兩宗因米其林轮胎引起的事故，先是雷諾的費爾南多·阿隆索在第九圈時出現右後輪爆胎，之後威廉姆斯的拉夫·舒馬克也出現同類意外，車子狠狠撞在牆上，造成脑震荡及脊柱骨折，需休養三個月直至2004年中國大獎賽才復出。此事故更為2005年美國大獎賽埋下伏筆，讓使用米其林輪胎的車隊最後因安全考量拒絕參賽。",
-    "source_url": "https://zh.wikipedia.org/wiki/2004%E5%B9%B4%E7%BE%8E%E5%9B%BD%E5%A4%A7%E5%A5%96%E8%B5%9B",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:83f5096e9f010350c11186bb0a19de5a2f12a6cb7866a469de800be87f416e64",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_002899",
     "category_ids": [
       "orthopedics_fracture"
@@ -38166,19 +37750,6 @@
     "collected_at": "2026-09-02T02:28:48Z",
     "content_hash": "sha256:b6f973d97c28386c690672d2d9be9740da29e8257de9ac828181bcff7289f104",
     "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_002937",
-    "category_ids": [
-      "gynecology_uterine_fibroids"
-    ],
-    "title": "张桂梅",
-    "content": "张桂梅（1957年6月15日—），女，满族，辽宁岫岩人，生於黑龙江牡丹江，中华人民共和国教师，中國共產黨黨員，云南省丽江华坪女子高级中学党支部书记、校长，华坪县儿童之家院长。她创建了中国第一所全免费女子高中，迄今已培养1600多名女大学生。因此，张桂梅获得了全国先进工作者、全国五一劳动奖章、优秀共产党员、全国优秀教师、全国脱贫攻坚楷模等荣誉。2023年10月，当选为全国妇联副主席（兼任）。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%BC%A0%E6%A1%82%E6%A2%85",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:c26dc54c68fe4d318d1c619d2e729a3d0a567f56a1b6b64bf5c0995e33eb468c",
-    "quality_score": 0.95
   },
   {
     "document_id": "doc_002938",
@@ -38974,32 +38545,6 @@
     "quality_score": 0.85
   },
   {
-    "document_id": "doc_002999",
-    "category_ids": [
-      "pediatrics_hand_foot_mouth"
-    ],
-    "title": "BLEACH角色列表",
-    "content": "BLEACH角色列表，介紹在久保帶人的漫畫作品《BLEACH》中登場的人物。 ※備註：香港版動畫配音有「DVD／J2／有線兒童台」（以下統稱DVD版，配製167集）和「Animax」（配製265集）兩種不同的版本。",
-    "source_url": "https://zh.wikipedia.org/wiki/BLEACH%E8%A7%92%E8%89%B2%E5%88%97%E8%A1%A8",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:4c31df38b42578349868e2a83ac7980959d71564f19a551288358f676c1e9d00",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_003000",
-    "category_ids": [
-      "pediatrics_hand_foot_mouth"
-    ],
-    "title": "HUNTER×HUNTER角色列表",
-    "content": "本列表為日本漫畫家冨樫義博所創作的少年漫畫作品《HUNTER×HUNTER》中登場人物介紹。 如無特別介紹僅有一位為新版聲優。 聲優排序為： 配音員（試播版）：（1998年超舊版）JUMP SUPER ANIME TOUR推出試作性質的OVA 配音員（第一作）：（1999年舊版）富士電視台（電視動畫・OVA） 配音員（第二作）：（2011年新版）日本電視台（電視動畫・劇場版）",
-    "source_url": "https://zh.wikipedia.org/wiki/HUNTER%C3%97HUNTER%E8%A7%92%E8%89%B2%E5%88%97%E8%A1%A8",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:b4ecdf7bfdf28ef4d3e3c3b0e3c256a384b9bdcf82252d24e6c73bde5279792b",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_003001",
     "category_ids": [
       "pediatrics_hand_foot_mouth"
@@ -39024,19 +38569,6 @@
     "collected_at": "2026-09-02T02:28:48Z",
     "content_hash": "sha256:07de516a8cfa09a0d5042426e3b6dd688ba341f9b5d2604b20a0e256f9071fed",
     "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_003003",
-    "category_ids": [
-      "pediatrics_hand_foot_mouth"
-    ],
-    "title": "哆啦A夢動畫集數列表 (2005年至今)",
-    "content": "本條目是關於朝日電視台自2005年4月15日起啟用新聲優團隊後，《哆啦A夢》動畫每集主題，該版本現今又被稱作「水田版」。由善聰一郎擔任動畫導演，2017年改由八鍬新之介擔任。開播初期以忠於原著故事為主，隨後幾年增加改編橋段或原創故事，收視率長期在高點。自2017年8月轉變新畫風起，大量翻新重製水田版曾經播放或大山版時期原創的故事。2020年受疫情影響重製情況加劇，重播故事比例也大幅增加。另外播放時間更改等因素，導致收視率下跌。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%93%86%E5%95%A6A%E5%A4%A2%E5%8B%95%E7%95%AB%E9%9B%86%E6%95%B8%E5%88%97%E8%A1%A8_(2005%E5%B9%B4%E8%87%B3%E4%BB%8A)",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:9856fc2dbf2d58a95be3f431b9f8996a1387241898d4f2210abd36da6f1cbb6d",
-    "quality_score": 0.95
   },
   {
     "document_id": "doc_003004",
@@ -41171,32 +40703,6 @@
     "quality_score": 0.85
   },
   {
-    "document_id": "doc_003168",
-    "category_ids": [
-      "stomatology_periodontitis"
-    ],
-    "title": "阿不来提·阿不都热西提",
-    "content": "阿不來提·阿不都熱西提（维吾尔老文字：ئابلەت ئابدۇرىشىت，拉丁维吾尔文：Ablet Abdurishit，1942年3月—），維吾爾族，新疆伊寧人，中国共产党、中华人民共和国政治人物，原副国级领导人。大學學歷，高級工程師。中国人民政治协商会议第十届、第十一届全国委员会副主席。中共第十五、十六、十七屆中央委員。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E9%98%BF%E4%B8%8D%E6%9D%A5%E6%8F%90%C2%B7%E9%98%BF%E4%B8%8D%E9%83%BD%E7%83%AD%E8%A5%BF%E6%8F%90",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:3c999d22f3e0783612c1b0f1765f02cde22217232733360f2e659157f36a7cce",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_003169",
-    "category_ids": [
-      "stomatology_periodontitis"
-    ],
-    "title": "趙燕俠",
-    "content": "赵燕侠（1928年3月1日—2025年3月19日），女，河北武清人，京剧表演艺术家、老文艺一级演员、第二批国家级非物质文化遗产项目京剧代表性传承人。京剧旦角“赵派”艺术创始人，中国共产党党员。她的唱念咬字清晰，观众不看字幕能听清楚唱词。其次，她将表演与唱结合，身体动作、面部表情与演唱并用，形成特有的舞台魅力。主要代表作品有《大英杰烈》、《红梅阁》、《红娘》、《辛安驿》、《碧波仙子》、《白蛇传》和现代京剧《芦荡火种》（后来的样板戏《沙家浜》）等。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E8%B6%99%E7%87%95%E4%BF%A0",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:a0d1d0dcb89346e008a002c98883f78b74d92b51a414b52c0b4e2650a61ef9be",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_003170",
     "category_ids": [
       "stomatology_periodontitis"
@@ -41275,19 +40781,6 @@
     "quality_score": 0.85
   },
   {
-    "document_id": "doc_003176",
-    "category_ids": [
-      "stomatology_periodontitis"
-    ],
-    "title": "宋宜山",
-    "content": "宋宜山（1906年—1991年），湖南省湘乡县溪口人，宋希濂的三哥。中国国民党候补中央委员、第一屆立法委員（湖南省第一區）。 早年，宋宜山毕业于南京的中央党务学校，是蔣中正的学生。获國民政府公派留学英国倫敦大學。归国后，宋宜山曾任中央訓練團講師、中央政治學校教授。他曾在中國國民黨中央黨部工作，任中央组织部人事处长。1948年，当选第一屆立法委員（湖南省第一區）。 中华人民共和国建国后，宋宜山留居香港。1957年，蔣中正欲派人与中国共产党密谈，将在香港的許孝炎召到台北。許孝炎提出三个人选：童冠賢、陈克文、宋宜山。許孝炎回到香港后，被童冠贤拒绝。蔣中正在剩下两人中选定宋宜山。当年4月，宋宜山从香港经广州乘火车秘密抵达北京。抵京后，总理周恩来在东兴楼宴请宋宜山。随后，中共中央统战部部长李维汉作为中共代表，与宋宜山就第三次国共合作、祖国统一问题进行协商。在与李维汉的谈话中，宋宜山表示，回台湾后，他要为促成两党谈判而努力。在中共中央安排下，宋宜山探望了在囚禁于功德林战犯管理所的弟弟宋希濂。在大陆停留两个星期后，宋宜山返回香港。宋宜山撰写一份1.5万余字的书面报告，由許孝炎转呈蔣中正。宋宜山在报告中，提及与周恩来、李维汉见面商谈的情况、中共提议，以及个人见闻。最后，宋宜山认为中共意图尚属诚恳，应当响应。蔣中正看到报告后相当反感，认为宋宜山已被赤化，不必返回台湾，留居香港。此后，宋宜山与妻子和八个子女在香港生活，随妻子改信基督教。他曾在香港高等学校教授经济学。 1973年7月，抵达香港仅一个半月的章士釗逝世。宋宜山参加章士钊追悼会，后被撤销立法委员资格，或被归咎于此事。民国70年8月17日的《總統府公報》，宋宜山自六十五會期起，即未請假亦未報到，以一會期無故不出席視為辭職，註銷委員名籍。 1983年，宋宜山中風。1991年在香港逝世。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%AE%8B%E5%AE%9C%E5%B1%B1",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:61fe6aa18df17ac6b1ae686e4d0e41b95df7fd7ddb34e2376b552c492a425858",
-    "quality_score": 0.95
-  },
-  {
     "document_id": "doc_003177",
     "category_ids": [
       "stomatology_periodontitis"
@@ -41299,32 +40792,6 @@
     "collected_at": "2026-09-02T02:28:48Z",
     "content_hash": "sha256:4e263e1a8bacd985dea3a843011b63dc11ef629e7c8012bee240c1888c034893",
     "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_003178",
-    "category_ids": [
-      "stomatology_periodontitis"
-    ],
-    "title": "司马义·艾买提",
-    "content": "司马义·艾买提（维吾尔老文字：ئىسمائىل ئەھمەد，拉丁维吾尔文：Ismail Ehmet，1935年9月—2018年10月16日），维吾尔族，新疆策勒人，中国共产党、中华人民共和国政治人物，原副国级领导人。中央高级党校新疆班毕业，大专学历。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%8F%B8%E9%A9%AC%E4%B9%89%C2%B7%E8%89%BE%E4%B9%B0%E6%8F%90",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:614a715e93b86d4d223fbde35ea4d68c9f989db2d2bdcb5c61a47dd7d578037e",
-    "quality_score": 0.85
-  },
-  {
-    "document_id": "doc_003179",
-    "category_ids": [
-      "stomatology_periodontitis"
-    ],
-    "title": "司马义·铁力瓦尔地",
-    "content": "司马义·铁力瓦尔地（维吾尔老文字：ئىسمائىل تىلىۋالدى，拉丁维吾尔文：Ismail Tiliwaldi，1944年11月—），维吾尔族，中华人民共和国新疆维吾尔自治区喀什地区疏附人，中国共产党、中华人民共和国政治人物，原副国级领导人。1973年5月加入中国共产党，1967年9月参加工作，新疆大学数学专业毕业，大学学历。曾任新疆维吾尔自治区人民政府主席、第十一届全国人大常委会副委员长。中国共产党第十六屆候補中央委員，第十七屆中央委員。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E5%8F%B8%E9%A9%AC%E4%B9%89%C2%B7%E9%93%81%E5%8A%9B%E7%93%A6%E5%B0%94%E5%9C%B0",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:3395ccb12c63b1338ce4b92d8563b6dddd92adb2af0a71dae300c229d5e7ef49",
-    "quality_score": 0.95
   },
   {
     "document_id": "doc_003180",
@@ -42536,19 +42003,6 @@
     "quality_score": 0.95
   },
   {
-    "document_id": "doc_003273",
-    "category_ids": [
-      "geriatrics_fall_prevention"
-    ],
-    "title": "怪侠欧阳德 (2011年电视剧)",
-    "content": "《怪侠欧阳德》，2011年12月19日于河南电视台都市频道首播的清朝古装剧。2012年1月16日江苏卫视上星，2012年3月2日至4月4日廣東珠江频道(粤语)播映。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E6%80%AA%E4%BE%A0%E6%AC%A7%E9%98%B3%E5%BE%B7_(2011%E5%B9%B4%E7%94%B5%E8%A7%86%E5%89%A7)",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:ba46712dbc0e2ca393eb98ff8073e9b1457bce270f35d8f505e36601aaa29480",
-    "quality_score": 0.85
-  },
-  {
     "document_id": "doc_003274",
     "category_ids": [
       "geriatrics_fall_prevention"
@@ -42728,19 +42182,6 @@
     "license": "public-info",
     "collected_at": "2026-09-02T02:28:48Z",
     "content_hash": "sha256:0a784b5a8cc2dbfae2736f8f28ab6957c785f66cb7bf58ace2f66bd476f5a338",
-    "quality_score": 0.95
-  },
-  {
-    "document_id": "doc_003288",
-    "category_ids": [
-      "geriatrics_fall_prevention"
-    ],
-    "title": "梨泰院踩踏事故",
-    "content": "梨泰院踩踏事故（韓語：이태원 압사 사고／梨泰院壓死事故，羅馬化：itaewon absa sago），亦稱梨泰院群眾事故、梨泰院人群推擠事故、梨泰院慘案（韓語：이태원 참사／梨泰院慘事，羅馬化：itaewon chamsa），為2022年10月29日發生在韓國首爾龍山區梨泰院洞梨泰院的严重群眾事故，當晚正值萬聖節前的週六，且為嚴重特殊傳染性肺炎疫情解除口罩佩戴令後的首次大型活動，大批民眾前往梨泰院參加萬聖節活動，因而導致事故發生。事故总共造成159人死亡、196人受傷，超越導致67人喪生的1959年釜山公立體育場踩踏事故，成為韓國迄今最嚴重的踩踏事故，此次事故為自造成304人死亡的2014年世越號事故以來韓國發生的最嚴重事故，亦為自造成502人死亡的1995年三豐百貨大樓倒塌事故以來在首爾市發生的最嚴重事故。",
-    "source_url": "https://zh.wikipedia.org/wiki/%E6%A2%A8%E6%B3%B0%E9%99%A2%E8%B8%A9%E8%B8%8F%E4%BA%8B%E6%95%85",
-    "license": "public-info",
-    "collected_at": "2026-09-02T02:28:48Z",
-    "content_hash": "sha256:22a19102009255f3ac8c24bb408abcfc848e01e3101dda5ad849300f2ebbaaf3",
     "quality_score": 0.95
   },
   {

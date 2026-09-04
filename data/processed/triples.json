@@ -136578,79 +136578,6 @@
     "review_status": "warning"
   },
   {
-    "subject": "国防大学霸凌致死案",
-    "subject_type": "Disease",
-    "relation": "HAS_SYMPTOM",
-    "object": "瘀伤",
-    "object_type": "Symptom",
-    "source_document_id": "doc_001695",
-    "source_text": "全身80%出现瘀伤和烧伤的痕迹",
-    "confidence": 0.746,
-    "extraction_confidence": 0.78,
-    "confidence_level": "medium",
-    "support_document_count": 1,
-    "support_evidence_count": 1,
-    "quality_flags": [
-      "single_source"
-    ],
-    "review_status": "warning"
-  },
-  {
-    "subject": "国防大学霸凌致死案",
-    "subject_type": "Disease",
-    "relation": "HAS_SYMPTOM",
-    "object": "烧伤",
-    "object_type": "Symptom",
-    "source_document_id": "doc_001695",
-    "source_text": "全身80%出现瘀伤和烧伤的痕迹",
-    "confidence": 0.596,
-    "extraction_confidence": 0.78,
-    "confidence_level": "review",
-    "support_document_count": 1,
-    "support_evidence_count": 1,
-    "quality_flags": [
-      "entity_type_conflict",
-      "single_source"
-    ],
-    "review_status": "warning"
-  },
-  {
-    "subject": "国防大学霸凌致死案",
-    "subject_type": "Disease",
-    "relation": "TREATED_BY",
-    "object": "沙登医院",
-    "object_type": "Treatment",
-    "source_document_id": "doc_001695",
-    "source_text": "于6月1日在雪州沙登医院不治",
-    "confidence": 0.744,
-    "extraction_confidence": 0.78,
-    "confidence_level": "medium",
-    "support_document_count": 1,
-    "support_evidence_count": 1,
-    "quality_flags": [
-      "single_source"
-    ],
-    "review_status": "warning"
-  },
-  {
-    "subject": "国防大学霸凌致死案",
-    "subject_type": "Disease",
-    "relation": "DIAGNOSED_BY",
-    "object": "法医专家沙曼的证词",
-    "object_type": "Examination",
-    "source_document_id": "doc_001695",
-    "source_text": "控方的关键证人——沙登医院法医专家沙曼的证词出现矛盾",
-    "confidence": 0.77,
-    "extraction_confidence": 0.78,
-    "confidence_level": "medium",
-    "support_document_count": 1,
-    "support_evidence_count": 1,
-    "quality_flags": [
-      "single_source"
-    ],
-    "review_status": "warning"
-  },
-  {
     "subject": "磺胺嘧啶银",
     "subject_type": "Drug",
     "relation": "HAS_SIDE_EFFECT",
@@ -137636,24 +137563,6 @@
     "support_evidence_count": 1,
     "quality_flags": [
       "short_evidence",
-      "single_source"
-    ],
-    "review_status": "warning"
-  },
-  {
-    "subject": "中国共产党",
-    "subject_type": "Disease",
-    "relation": "RELATED_TO",
-    "object": "法轮功学员",
-    "object_type": "Population",
-    "source_document_id": "doc_001716",
-    "source_text": "中国共产党政府(特别是政法委员会、解放军军委等部门)被独立调查者指控大规模系统性活体摘取良心犯的器官",
-    "confidence": 0.811,
-    "extraction_confidence": 0.78,
-    "confidence_level": "high",
-    "support_document_count": 1,
-    "support_evidence_count": 1,
-    "quality_flags": [
       "single_source"
     ],
     "review_status": "warning"
