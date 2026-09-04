@@ -1,5 +1,14 @@
 import { describe, it, expect } from "vitest";
-import { parseGraph, filterGraph, neighborhood, searchNodes } from "./graph";
+import {
+  bipartiteView,
+  confidenceView,
+  filterGraph,
+  neighborhood,
+  overview,
+  parseGraph,
+  searchNodes,
+  similarityView,
+} from "./graph";
 
 const triple = {
   subject: "甲",
@@ -91,5 +100,57 @@ describe("查询与图谱范围", () => {
   });
   it("空图安全返回", () => {
     expect(neighborhood(parseGraph("[]")).nodes).toEqual([]);
+  });
+  it("结构概览限制首屏规模并保留完整规模统计", () => {
+    const large = parseGraph(
+      JSON.stringify(
+        Array.from({ length: 160 }, (_, i) => ({ ...triple, object: `概览${i}` })),
+      ),
+    );
+    const view = overview(large, 80, 100);
+    expect(view.nodes).toHaveLength(80);
+    expect(view.totalNodes).toBe(161);
+    expect(view.totalEdges).toBe(160);
+  });
+  it("可信度阈值可调", () => {
+    const quality = parseGraph(
+      JSON.stringify([
+        { ...triple, confidence: 0.81 },
+        { ...triple, object: "丙", confidence: 0.59 },
+      ]),
+    );
+    expect(confidenceView(quality, 0.8).totalEdges).toBe(1);
+    expect(confidenceView(quality, 0.55).totalEdges).toBe(2);
+  });
+  it("疾病—症状二部图只保留对应关系", () => {
+    const medical = parseGraph(
+      JSON.stringify([
+        { ...triple, subject_type: "Disease", object_type: "Symptom", relation: "HAS_SYMPTOM" },
+        { ...triple, object: "药物", subject_type: "Disease", object_type: "Drug", relation: "TREATED_BY" },
+      ]),
+    );
+    const view = bipartiteView(medical);
+    expect(view.nodes).toHaveLength(2);
+    expect(view.edges.map((edge) => edge.relation)).toEqual(["HAS_SYMPTOM"]);
+  });
+  it("相似疾病视图由至少两个共享症状派生且不伪装成原始证据", () => {
+    const rows = ["头痛", "发热"].flatMap((symptom) =>
+      ["疾病甲", "疾病乙"].map((disease) => ({
+        subject: disease,
+        subject_type: "Disease",
+        relation: "HAS_SYMPTOM",
+        object: symptom,
+        object_type: "Symptom",
+      })),
+    );
+    const view = similarityView(parseGraph(JSON.stringify(rows)));
+    expect(view.nodes).toHaveLength(2);
+    expect(view.edges).toHaveLength(1);
+    expect(view.edges[0]).toMatchObject({
+      relation: "SHARES_SYMPTOM",
+      derived: true,
+      weight: 2,
+      evidence: [],
+    });
   });
 });
