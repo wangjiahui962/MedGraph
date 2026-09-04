@@ -22,3 +22,14 @@ env/
 # Local runtime output and caches
 *.log
 .pytest_cache/
+node_modules/
+dist/
+*.db
+*.db-*
+*.sqlite3*
+collector/data/
+data/external/
+data/processed/*
+!data/processed/triples.json
+data/_infer_result.md
+_llmdiff.txt

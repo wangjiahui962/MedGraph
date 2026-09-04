@@ -109,6 +109,112 @@ code {
   margin-left: 14px;
   letter-spacing: 2px;
 }
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-left: auto;
+}
+.action-btn {
+  font-size: 12px;
+  white-space: nowrap;
+}
+.action-btn.primary {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+.action-btn.primary:hover:not(:disabled) {
+  background: #1a6a64;
+}
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.job-panel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 11px;
+  background: #fbfcfc;
+  max-width: 250px;
+}
+.job-panel.running {
+  border-color: #f3d9a8;
+  background: #fffbf1;
+}
+.job-panel.succeeded {
+  border-color: #cde3d6;
+  background: #f3faf5;
+}
+.job-panel.failed {
+  border-color: #eccfcf;
+  background: #fdf4f4;
+}
+.job-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex-shrink: 0;
+}
+.job-panel.running .job-dot {
+  background: #d99b48;
+  animation: job-pulse 1.2s infinite;
+}
+.job-panel.succeeded .job-dot {
+  background: var(--green);
+}
+.job-panel.failed .job-dot {
+  background: #cc5a5a;
+}
+@keyframes job-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+.job-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.job-info strong {
+  font-size: 11px;
+  white-space: nowrap;
+}
+.job-info span {
+  font-size: 10px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.job-info .job-detail {
+  display: block;
+  font-size: 10px;
+  line-height: 1.55;
+  color: #a34747;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  max-height: 4.8em;
+  overflow: hidden;
+}
+.job-error {
+  padding: 10px 14px;
+  background: #fdf4f4;
+  border: 1px solid #eccfcf;
+  color: #a34747;
+  font-size: 11px;
+  border-radius: 7px;
+  margin-bottom: 15px;
+}
 .local-badge {
   font-size: 11px;
   border: 1px solid #dfece5;
@@ -600,6 +706,52 @@ input[type="checkbox"] {
   color: #91a394;
   line-height: 1.8;
 }
+.evidence-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.doc-expand {
+  padding: 2px 10px;
+  border: 1px solid #d7e4dc;
+  border-radius: 999px;
+  background: #f2f8f4;
+  color: var(--green);
+  font-size: 10px;
+  cursor: pointer;
+}
+.doc-expand:hover:not(:disabled) {
+  background: #e2efe7;
+}
+.doc-expand:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+.doc-original {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #dfe8e3;
+}
+.doc-original h5 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--green);
+  overflow-wrap: anywhere;
+}
+.doc-original p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.95;
+  color: #506b5a;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 26rem;
+  overflow: auto;
+  background: #f7f9f8;
+  border: 1px solid #edf1ef;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
 .page-footer {
   display: flex;
   justify-content: space-between;
@@ -747,4 +899,40 @@ input[type="checkbox"] {
   .graph-heading .chip {
     display: none;
   }
+}
+
+
+/* “增加新数据”（维基）入口：自定义篇数输入 + 按钮 */
+.sample-add {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sample-add input[type="number"] {
+  width: 58px;
+  font-size: 12px;
+  padding: 5px 4px 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: inherit;
+  text-align: right;
+}
+.sample-add input[type="number"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.sample-add .count-unit {
+  font-size: 12px;
+  color: var(--muted);
+}
+/* 隐藏原生上下箭头，保持顶栏紧凑（仍可键盘上下调整） */
+.sample-add input[type="number"]::-webkit-outer-spin-button,
+.sample-add input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.sample-add input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }

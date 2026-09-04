@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "cytoscape": "^3.33.1",
+    "cytoscape-fcose": "^2.2.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

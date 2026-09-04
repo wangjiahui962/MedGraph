@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react";
 import cytoscape, { type Core } from "cytoscape";
+import fcose from "cytoscape-fcose";
 import type { GraphView } from "./graph";
+
+// 注册 fcose 力导向布局插件
+cytoscape.use(fcose);
 
 function fitGraph(cy: Core) {
   cy.fit(undefined, 48);
@@ -37,8 +41,17 @@ export function GraphCanvas({
   handlers.current = { onNode, onEdge };
   useEffect(() => {
     if (!container.current || !view.nodes.length) return;
+    // 计算每个节点的关联度（degree，即连接数），用于节点大小映射
+    const degree = new Map(view.nodes.map((n) => [n.id, 0]));
+    view.edges.forEach((e) => {
+      degree.set(e.source, (degree.get(e.source) ?? 0) + 1);
+      if (e.source !== e.target)
+        degree.set(e.target, (degree.get(e.target) ?? 0) + 1);
+    });
     const cy = cytoscape({
       container: container.current,
+      // 高分屏适配：按设备像素比渲染，避免画布/文字在高分屏下发虚
+      pixelRatio: window.devicePixelRatio || 1,
       elements: [
         ...view.nodes.map((n, index) => ({
           data: {
@@ -46,22 +59,23 @@ export function GraphCanvas({
             label: n.name,
             color: palette[types.indexOf(n.type) % palette.length],
             focus: n.id === view.focusId ? 1 : 0,
+            degree: degree.get(n.id) ?? 0,
           },
           position:
             n.id === view.focusId
               ? { x: 0, y: 0 }
               : {
-                  x:
-                    Math.cos(
-                      (index * 2 * Math.PI) /
-                        Math.max(view.nodes.length - 1, 1),
-                    ) * 240,
-                  y:
-                    Math.sin(
-                      (index * 2 * Math.PI) /
-                        Math.max(view.nodes.length - 1, 1),
-                    ) * 240,
-                },
+                x:
+                  Math.cos(
+                    (index * 2 * Math.PI) /
+                    Math.max(view.nodes.length - 1, 1),
+                  ) * 240,
+                y:
+                  Math.sin(
+                    (index * 2 * Math.PI) /
+                    Math.max(view.nodes.length - 1, 1),
+                  ) * 240,
+              },
         })),
         ...view.edges.map((e) => ({
           data: {
@@ -79,27 +93,31 @@ export function GraphCanvas({
             "background-color": "data(color)",
             label: "data(label)",
             color: "#334650",
+            // 中文标签优先用黑体类字体（小字号更清晰）；字号 12px
             "font-size": 12,
-            "font-family": "Microsoft YaHei, sans-serif",
+            "font-family": "Microsoft YaHei, PingFang SC, Noto Sans CJK SC, '楷体', KaiTi, sans-serif",
             "text-valign": "bottom",
-            "text-margin-y": 9,
+            "text-margin-y": 4,
             "text-wrap": "ellipsis",
-            "text-max-width": "125px",
-            width: 26,
-            height: 26,
-            "border-width": 5,
+            "text-max-width": "90px",
+            // 节点大小随关联度（degree）缩放：degree 1~15 映射到 7~22px，
+            // 核心实体（连接多）更大、边缘实体更小，一眼看出重要节点
+            width: "mapData(degree, 1, 15, 7, 22)",
+            height: "mapData(degree, 1, 15, 7, 22)",
+            "border-width": 0,
             "border-color": "#ffffff",
           },
         },
         {
           selector: "node[focus = 1]",
           style: {
-            width: 46,
-            height: 46,
-            "border-width": 7,
+            // 焦点（当前中心）始终最大，便于定位
+            width: "mapData(degree, 1, 15, 14, 32)",
+            height: "mapData(degree, 1, 15, 14, 32)",
+            "border-width": 0,
             "border-color": "#d9ebe8",
             "font-weight": "bold",
-            "font-size": 14,
+            "font-size": 13,
           },
         },
         {
@@ -110,13 +128,8 @@ export function GraphCanvas({
             "target-arrow-color": "#9cb6b5",
             "target-arrow-shape": "triangle",
             "curve-style": "bezier",
-            label: "data(label)",
-            "font-size": 10,
-            color: "#6c8389",
-            "text-background-color": "#f7faf9",
-            "text-background-opacity": 0.92,
-            "text-background-padding": "3px",
-            "text-rotation": "autorotate",
+            // 隐藏连线上的关系文字，避免内圈文字扎堆
+            label: "",
           },
         },
         {
@@ -129,24 +142,21 @@ export function GraphCanvas({
           },
         },
       ],
-      layout:
-        view.nodes.length <= 12
-          ? {
-              name: "concentric",
-              concentric: (node) => (node.data("focus") ? 10 : 1),
-              levelWidth: () => 1,
-              minNodeSpacing: 90,
-              padding: 48,
-              animate: false,
-            }
-          : {
-              name: "cose",
-              animate: false,
-              randomize: false,
-              nodeRepulsion: () => 16000,
-              idealEdgeLength: () => 150,
-              padding: 48,
-            },
+      layout: {
+        // fcose 力导向布局：节点自动避让、分布均衡自然
+        // （fcose 专属参数不在 cytoscape 基础布局类型里，此处用断言）
+        name: "fcose",
+        quality: "default",
+        animate: false,
+        randomize: false,
+        // 布局时把标签尺寸计入节点，避免文字扎堆
+        nodeDimensionsIncludeLabels: true,
+        // 边弹簧理想长度：适中即可，节点间距离由节点大小 + 斥力共同决定
+        idealEdgeLength: 90,
+        // 节点斥力：越大分布越松散
+        nodeRepulsion: 9000,
+        padding: 60,
+      } as cytoscape.LayoutOptions,
       minZoom: 0.08,
       maxZoom: 3,
       wheelSensitivity: 0.2,

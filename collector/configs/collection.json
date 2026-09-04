@@ -1,0 +1,32 @@
+{
+  "catalog": "configs/clc_r_categories.csv",
+  "default_source": "mediawiki",
+  "output_root": "data/published",
+  "page_size": 40,
+  "quality_gates": {
+    "min_categories": 100,
+    "min_documents": 3000,
+    "min_per_category": 20,
+    "min_text_chars": 40
+  },
+  "sources": {
+    "cnki": {
+      "access_basis": "学校或机构授权网络内，由用户通过知网页面合法导出的题录与摘要",
+      "batch_manifest": "data/inbox/cnki/batches.csv",
+      "input_dir": "data/inbox/cnki",
+      "rights_statement": "仅限课程研究使用；原始文献权利归相应作者、出版者及数据库服务方所有。"
+    },
+    "mediawiki": {
+      "api_url": "https://zh.wikipedia.org/w/api.php",
+      "max_response_bytes": 8000000,
+      "request_delay": 0.75,
+      "retries": 5,
+      "max_lag": 5,
+      "max_candidates_per_category": 100,
+      "rights_statement": "须遵守来源页面显示的许可及署名要求；发布前再次核验。",
+      "timeout": 20,
+      "user_agent": "MedGraphSystemBot/0.2 (https://github.com/wangjiahui962/MedGraph; educational course project)"
+    }
+  },
+  "state_db": "data/state/collection.sqlite3"
+}

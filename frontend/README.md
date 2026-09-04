@@ -22,9 +22,14 @@ npm run preview
 
 `build` 包含 TypeScript 检查，输出 `dist/`。`preview` 通常使用 4173 端口。本工程不自动发布到互联网。
 
+> 顶部“增加新数据 / 提取现有数据”依赖 `python server.py` 提供的 `/api`，只有 `npm run dev` 开发模式会代理 `/api`；`npm run preview` 或构建产物没有该代理，这几个按钮会提示无法连接后端。
+>
+> “增加新数据”走后端 `/api/collect`：从中文维基百科搜索新增文章（顶部可自定义输入篇数，1~100 的任意整数），抓取正文后经 OpenCC
+> 繁体转简体存入 documents.db，此步骤不做 LLM 抽取；随后点“提取现有数据”才会执行 LLM 抽取 → 关键词过滤 → 入库 → 导出前端。
+
 ## 数据与统计口径
 
-`predev` 和 `prebuild` 会自动将 `../data/processed/triples.json` 复制到 `public/data/triples.json`，不修改源文件。生成副本与构建产物不提交。更新数据后重启开发服务或重新构建；只运行 preview 不会重新同步。
+`predev` 和 `prebuild` 会自动将 `../data/processed/triples.json` 复制到 `public/data/triples.json`，并把 `../data/processed/documents.json` 复制到 `public/data/documents.json`，不修改源文件。`documents.json` 由 `python db/store_documents.py --export-frontend` 从文档库生成，供证据面板“展开”显示文档原文；正文/标题在导出时会经 OpenCC t2s 繁体转简体，与抽取原句同一简体口径。生成副本与构建产物不提交。更新数据后重启开发服务或重新构建；只运行 preview 不会重新同步。
 
 数据必须是 JSON 数组，每条记录字段为：
 
@@ -41,6 +46,16 @@ npm run preview
 ```
 
 上述仅为字段格式示意，不属于实际医学知识。前端只加载项目真实文件。
+
+`documents.json` 每条记录字段为：
+
+```json
+{
+  "document_id": "doc_示例",
+  "title": "文档标题",
+  "content": "文档全文原文"
+}
+```
 
 - 实体键为名称与类型的组合；同名不同类型保留为不同节点。
 - 关系按两端实体与关系名称去重；来源按文档编号与原句组合去重。
@@ -79,4 +94,4 @@ npx playwright test
 
 `src/graph.ts` 是数据适配与查询入口；以后对接后端可替换加载函数，保持组件接收的图结构不变。本次没有实现任何后端 API。
 
-自动抽取结果仅用于课程展示，不作为医疗建议。前端不读取原始语料，不虚构实体简介或来源链接。
+自动抽取结果仅用于课程展示，不作为医疗建议。证据面板默认只显示抽取原句，点击“展开”才按需读取 `documents.json` 展示对应文档原文；前端不虚构实体简介或来源链接。

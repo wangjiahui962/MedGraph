@@ -1,0 +1,263 @@
+{
+  "entity_types": {
+    "Disease": {
+      "label": "疾病",
+      "attributes": {
+        "name": {
+          "type": "str",
+          "desc": "规范名称",
+          "required": true
+        },
+        "aliases": {
+          "type": "list[str]",
+          "desc": "别名列表",
+          "required": false
+        },
+        "definition": {
+          "type": "str",
+          "desc": "定义/概述",
+          "required": false
+        },
+        "icd_code": {
+          "type": "str",
+          "desc": "ICD 编码",
+          "required": false
+        },
+        "category_id": {
+          "type": "str",
+          "desc": "所属类别",
+          "required": false
+        }
+      }
+    },
+    "Symptom": {
+      "label": "症状",
+      "attributes": {
+        "name": {
+          "type": "str",
+          "desc": "症状名",
+          "required": true
+        },
+        "body_site": {
+          "type": "str",
+          "desc": "发生部位",
+          "required": false
+        },
+        "severity": {
+          "type": "str",
+          "desc": "严重程度",
+          "required": false
+        }
+      }
+    },
+    "Drug": {
+      "label": "药物",
+      "attributes": {
+        "name": {
+          "type": "str",
+          "desc": "通用名",
+          "required": true
+        },
+        "generic_name": {
+          "type": "str",
+          "desc": "通用名(英)",
+          "required": false
+        },
+        "dosage_form": {
+          "type": "str",
+          "desc": "剂型",
+          "required": false
+        }
+      }
+    },
+    "Treatment": {
+      "label": "治疗方法",
+      "attributes": {
+        "name": {
+          "type": "str",
+          "desc": "治疗/措施名",
+          "required": true
+        },
+        "treatment_type": {
+          "type": "str",
+          "desc": "治疗分类",
+          "required": false
+        }
+      }
+    },
+    "Examination": {
+      "label": "检查方法",
+      "attributes": {
+        "name": {
+          "type": "str",
+          "desc": "检查名称",
+          "required": true
+        },
+        "method": {
+          "type": "str",
+          "desc": "检查手段",
+          "required": false
+        }
+      }
+    },
+    "Department": {
+      "label": "科室",
+      "attributes": {
+        "name": {
+          "type": "str",
+          "desc": "科室名",
+          "required": true
+        }
+      }
+    },
+    "Population": {
+      "label": "人群",
+      "attributes": {
+        "name": {
+          "type": "str",
+          "desc": "人群名称",
+          "required": true
+        },
+        "age_range": {
+          "type": "str",
+          "desc": "年龄段",
+          "required": false
+        }
+      }
+    },
+    "RiskFactor": {
+      "label": "危险因素",
+      "attributes": {
+        "name": {
+          "type": "str",
+          "desc": "危险因素名",
+          "required": true
+        },
+        "category": {
+          "type": "str",
+          "desc": "因素分类",
+          "required": false
+        }
+      }
+    },
+    "Complication": {
+      "label": "并发症",
+      "attributes": {
+        "name": {
+          "type": "str",
+          "desc": "并发症名",
+          "required": true
+        }
+      }
+    }
+  },
+  "relation_types": {
+    "HAS_SYMPTOM": {
+      "label": "常见症状",
+      "domain": [
+        "Disease"
+      ],
+      "range": [
+        "Symptom"
+      ],
+      "symmetric": false
+    },
+    "TREATED_BY": {
+      "label": "治疗",
+      "domain": [
+        "Disease"
+      ],
+      "range": [
+        "Drug",
+        "Treatment"
+      ],
+      "symmetric": false
+    },
+    "DIAGNOSED_BY": {
+      "label": "检查方法",
+      "domain": [
+        "Disease"
+      ],
+      "range": [
+        "Examination"
+      ],
+      "symmetric": false
+    },
+    "HAS_RISK_FACTOR": {
+      "label": "病因",
+      "domain": [
+        "Disease"
+      ],
+      "range": [
+        "RiskFactor"
+      ],
+      "symmetric": false
+    },
+    "HAS_SIDE_EFFECT": {
+      "label": "不良反应",
+      "domain": [
+        "Drug"
+      ],
+      "range": [
+        "Symptom"
+      ],
+      "symmetric": false
+    },
+    "BELONGS_TO": {
+      "label": "所属科室",
+      "domain": [
+        "Disease"
+      ],
+      "range": [
+        "Department"
+      ],
+      "symmetric": false
+    },
+    "HIGH_RISK_FOR": {
+      "label": "高危人群",
+      "domain": [
+        "Population"
+      ],
+      "range": [
+        "Disease"
+      ],
+      "symmetric": false
+    },
+    "MAY_CAUSE": {
+      "label": "可致并发症",
+      "domain": [
+        "Disease"
+      ],
+      "range": [
+        "Complication"
+      ],
+      "symmetric": false
+    },
+    "RELATED_TO": {
+      "label": "相关",
+      "domain": [
+        "Disease",
+        "Symptom",
+        "Drug",
+        "Treatment",
+        "Examination",
+        "Department",
+        "Population",
+        "RiskFactor",
+        "Complication"
+      ],
+      "range": [
+        "Disease",
+        "Symptom",
+        "Drug",
+        "Treatment",
+        "Examination",
+        "Department",
+        "Population",
+        "RiskFactor",
+        "Complication"
+      ],
+      "symmetric": true
+    }
+  }
+}
