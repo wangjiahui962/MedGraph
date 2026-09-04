@@ -29,6 +29,7 @@ export interface GraphView {
   focusId: string | null;
   totalNodes: number;
 }
+export type GraphMode = "overview" | "focus" | "high";
 const clean = (v: unknown) => (typeof v === "string" ? v.trim() : "");
 const compare = (a: Entity, b: Entity) =>
   a.name.localeCompare(b.name, "zh-CN") ||
@@ -119,6 +120,7 @@ export function filterGraph(
   graph: Graph,
   types: string[],
   relations: string[],
+  preserveIsolated = false,
 ): Graph {
   const ids = new Set(
     graph.nodes.filter((n) => types.includes(n.type)).map((n) => n.id),
@@ -130,9 +132,18 @@ export function filterGraph(
   const connected = new Set(edges.flatMap((e) => [e.source, e.target]));
   return {
     ...graph,
-    nodes: graph.nodes.filter((n) => connected.has(n.id)),
+    nodes: preserveIsolated
+      ? graph.nodes.filter((n) => ids.has(n.id))
+      : graph.nodes.filter((n) => connected.has(n.id)),
     edges,
   };
+}
+
+export function overview(graph: Graph, highConfidenceOnly = false): GraphView {
+  const edges = highConfidenceOnly
+    ? graph.edges.filter((e) => e.confidence >= 0.8)
+    : graph.edges;
+  return { nodes: graph.nodes, edges, focusId: null, totalNodes: graph.nodes.length };
 }
 export function searchNodes(graph: Pick<Graph, "nodes">, query: string) {
   const keyword = query.trim().toLocaleLowerCase();

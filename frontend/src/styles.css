@@ -569,6 +569,10 @@ input[type="checkbox"] {
 .graph-heading p strong {
   color: #4e7769;
 }
+.graph-mode-switch { display:flex; align-items:center; gap:4px; flex-wrap:wrap; justify-content:flex-end; }
+.graph-mode-switch button { font-size:11px; padding:6px 9px; color:#66827f; background:#fff; }
+.graph-mode-switch button.active { color:#fff; background:var(--green); border-color:var(--green); }
+.graph-mode-switch .reset { margin-left:5px; }
 .chip {
   display: inline-block;
   font-size: 9px;
@@ -595,6 +599,7 @@ input[type="checkbox"] {
   position: absolute;
   inset: 0;
 }
+.node-tooltip { position:absolute; z-index:5; pointer-events:none; padding:4px 8px; border-radius:5px; background:#223c42; color:#fff; font-size:11px; box-shadow:0 2px 8px #183f3d33; white-space:nowrap; }
 .canvas-tools {
   position: absolute;
   right: 16px;

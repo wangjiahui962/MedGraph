@@ -4,6 +4,8 @@ import {
   loadGraph,
   neighborhood,
   searchNodes,
+  overview,
+  type GraphMode,
   type Graph,
   type Relation,
 } from "./graph";
@@ -53,6 +55,7 @@ export default function App() {
   const [chosenTypes, setChosenTypes] = useState<string[]>([]);
   const [chosenRelations, setChosenRelations] = useState<string[]>([]);
   const [focus, setFocus] = useState<string | null>(null);
+  const [graphMode, setGraphMode] = useState<GraphMode>("overview");
   const [edgeId, setEdgeId] = useState<string | null>(null);
   const [resultLimit, setResultLimit] = useState(40);
   const [resetKey, setResetKey] = useState(0);
@@ -185,15 +188,17 @@ export default function App() {
     [graph],
   );
   const filtered = useMemo(
-    () => (graph ? filterGraph(graph, chosenTypes, chosenRelations) : null),
-    [graph, chosenTypes, chosenRelations],
+    () => (graph ? filterGraph(graph, chosenTypes, chosenRelations, graphMode !== "focus") : null),
+    [graph, chosenTypes, chosenRelations, graphMode],
   );
   const view = useMemo(() => {
     if (!filtered) return null;
+    if (graphMode === "overview") return overview(filtered);
+    if (graphMode === "high") return overview(filtered, true);
     // 搜索结果可能因左侧筛选被隐藏；选中后用完整图谱定位，避免出现“查到但看不到”。
     const focusVisible = !focus || filtered.nodes.some((n) => n.id === focus);
     return neighborhood(focus && !focusVisible ? graph ?? filtered : filtered, focus);
-  }, [filtered, graph, focus]);
+  }, [filtered, graph, focus, graphMode]);
   const results = useMemo(
     () => (graph ? searchNodes(graph, query) : []),
     [graph, query],
@@ -222,6 +227,7 @@ export default function App() {
   );
   function pickNode(id: string) {
     setFocus(id);
+    setGraphMode("focus");
     setEdgeId(null);
   }
   function reset() {
@@ -229,6 +235,7 @@ export default function App() {
     setChosenTypes(types);
     setChosenRelations(relations);
     setFocus(null);
+    setGraphMode("overview");
     setEdgeId(null);
     setResultLimit(40);
     setResetKey((k) => k + 1);
@@ -487,10 +494,14 @@ export default function App() {
                 <div className="graph-heading">
                   <div>
                     <h2>
-                      关系图谱 <span className="chip">一跳邻域</span>
+                      关系图谱 <span className="chip">{graphMode === "overview" ? "全图总览" : graphMode === "high" ? "高可信关系" : "一跳邻域"}</span>
                     </h2>
                     <p>
-                      {selected ? (
+                      {graphMode === "overview" ? (
+                        <>完整图谱总览 · 鼠标悬停查看节点名称</>
+                      ) : graphMode === "high" ? (
+                        <>仅显示高可信关系 · 点击节点聚焦</>
+                      ) : selected ? (
                         <>
                           以 <strong>{selected.name}</strong> 为中心
                         </>
@@ -499,9 +510,12 @@ export default function App() {
                       )}
                     </p>
                   </div>
-                  <button className="reset" onClick={reset}>
-                    ↺ 恢复默认
-                  </button>
+                  <div className="graph-mode-switch" role="group" aria-label="图谱视图模式">
+                    {([['overview', '全图'], ['focus', '聚焦'], ['high', '仅高可信']] as [GraphMode, string][]).map(([mode, label]) => (
+                      <button key={mode} className={graphMode === mode ? "active" : ""} onClick={() => { setGraphMode(mode); if (mode !== "focus") setFocus(null); setEdgeId(null); }}>{label}</button>
+                    ))}
+                    <button className="reset" onClick={reset}>↺ 恢复默认</button>
+                  </div>
                 </div>
                 {view && (
                   <GraphCanvas
@@ -511,6 +525,7 @@ export default function App() {
                     selectedEdge={selectedEdge?.id ?? null}
                     onNode={pickNode}
                     onEdge={setEdgeId}
+                    mode={graphMode}
                   />
                 )}
                 {view && view.totalNodes > view.nodes.length && (

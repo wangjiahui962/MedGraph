@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import cytoscape, { type Core } from "cytoscape";
 import fcose from "cytoscape-fcose";
-import type { GraphView } from "./graph";
+import type { GraphMode, GraphView } from "./graph";
 
 // 注册 fcose 力导向布局插件
 cytoscape.use(fcose);
@@ -28,16 +28,19 @@ export function GraphCanvas({
   selectedEdge,
   onNode,
   onEdge,
+  mode,
 }: {
   view: GraphView;
   types: string[];
   selectedEdge: string | null;
   onNode: (id: string) => void;
   onEdge: (id: string) => void;
+  mode: GraphMode;
 }) {
   const container = useRef<HTMLDivElement>(null);
   const cyRef = useRef<Core | null>(null);
   const handlers = useRef({ onNode, onEdge });
+  const [hovered, setHovered] = useState<{ name: string; x: number; y: number } | null>(null);
   handlers.current = { onNode, onEdge };
   useEffect(() => {
     if (!container.current || !view.nodes.length) return;
@@ -48,6 +51,10 @@ export function GraphCanvas({
       if (e.source !== e.target)
         degree.set(e.target, (degree.get(e.target) ?? 0) + 1);
     });
+    const sortedDegrees = [...degree.values()].sort((a, b) => b - a);
+    const labelThreshold = mode === "overview"
+      ? Math.max(2, sortedDegrees[Math.min(24, Math.max(0, sortedDegrees.length - 1))] ?? 0)
+      : 0;
     const cy = cytoscape({
       container: container.current,
       // 高分屏适配：按设备像素比渲染，避免画布/文字在高分屏下发虚
@@ -60,6 +67,8 @@ export function GraphCanvas({
             color: palette[types.indexOf(n.type) % palette.length],
             focus: n.id === view.focusId ? 1 : 0,
             degree: degree.get(n.id) ?? 0,
+            showLabel: mode !== "overview" || (degree.get(n.id) ?? 0) >= labelThreshold ? 1 : 0,
+            isolated: (degree.get(n.id) ?? 0) === 0 ? 1 : 0,
           },
           position:
             n.id === view.focusId
@@ -108,8 +117,11 @@ export function GraphCanvas({
             height: "mapData(degree, 1, 15, 7, 22)",
             "border-width": 0,
             "border-color": "#ffffff",
+            opacity: 1,
           },
         },
+        { selector: "node[showLabel = 0]", style: { label: "" } },
+        { selector: "node[isolated = 1]", style: { opacity: 0.35 } },
         {
           selector: "node[focus = 1]",
           style: {
@@ -140,7 +152,7 @@ export function GraphCanvas({
             "line-color": "#d58b2c",
             "target-arrow-color": "#d58b2c",
             "line-style": "dashed",
-            opacity: 0.78,
+            opacity: 0.35,
           },
         },
         {
@@ -166,7 +178,7 @@ export function GraphCanvas({
         name: "fcose",
         quality: "default",
         animate: false,
-        randomize: false,
+        randomize: mode !== "focus",
         // 布局时把标签尺寸计入节点，避免文字扎堆
         nodeDimensionsIncludeLabels: true,
         // 边弹簧理想长度：适中即可，节点间距离由节点大小 + 斥力共同决定
@@ -183,6 +195,11 @@ export function GraphCanvas({
     fitGraph(cy);
     cy.on("tap", "node", (event) => handlers.current.onNode(event.target.id()));
     cy.on("tap", "edge", (event) => handlers.current.onEdge(event.target.id()));
+    cy.on("mouseover", "node", (event) => {
+      const p = event.renderedPosition;
+      setHovered({ name: event.target.data("label"), x: p.x + 12, y: p.y + 12 });
+    });
+    cy.on("mouseout", "node", () => setHovered(null));
     const observer = new ResizeObserver(() => cy.resize());
     observer.observe(container.current);
     return () => {
@@ -190,7 +207,7 @@ export function GraphCanvas({
       cy.destroy();
       cyRef.current = null;
     };
-  }, [view, types]);
+  }, [view, types, mode]);
   useEffect(() => {
     const cy = cyRef.current;
     if (!cy) return;
@@ -213,6 +230,9 @@ export function GraphCanvas({
         role="img"
         aria-label="实体关系图。可使用左侧搜索和右侧关系列表进行键盘操作。"
       />
+      {hovered && mode === "overview" && (
+        <div className="node-tooltip" style={{ left: hovered.x, top: hovered.y }}>{hovered.name}</div>
+      )}
       {!view.nodes.length && (
         <div className="canvas-empty">
           当前筛选下没有实体
