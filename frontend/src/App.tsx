@@ -342,6 +342,34 @@ export default function App() {
                     </button>
                   )}
                 </label>
+                <div className="results-heading">
+                  {query ? "搜索结果" : "实体目录"}
+                  <span>{results.length} 个</span>
+                </div>
+                <div className="results" aria-live="polite">
+                  {!results.length && (
+                    <p className="muted">没有匹配实体，请调整关键词或筛选。</p>
+                  )}
+                  {results.slice(0, resultLimit).map((n) => (
+                    <button
+                      className={`entity-result ${n.id === selected?.id ? "active" : ""}`}
+                      key={n.id}
+                      onClick={() => pickNode(n.id)}
+                      title={n.name}
+                    >
+                      <span>{n.name}</span>
+                      <small>{n.type}</small>
+                    </button>
+                  ))}
+                  {results.length > resultLimit && (
+                    <button
+                      className="more"
+                      onClick={() => setResultLimit((n) => n + 40)}
+                    >
+                      加载更多（剩余 {results.length - resultLimit}）
+                    </button>
+                  )}
+                </div>
                 <fieldset>
                   <legend>
                     实体类型{" "}
@@ -407,34 +435,6 @@ export default function App() {
                     ))}
                   </div>
                 </fieldset>
-                <div className="results-heading">
-                  {query ? "搜索结果" : "实体目录"}
-                  <span>{results.length} 个</span>
-                </div>
-                <div className="results" aria-live="polite">
-                  {!results.length && (
-                    <p className="muted">没有匹配实体，请调整关键词或筛选。</p>
-                  )}
-                  {results.slice(0, resultLimit).map((n) => (
-                    <button
-                      className={`entity-result ${n.id === selected?.id ? "active" : ""}`}
-                      key={n.id}
-                      onClick={() => pickNode(n.id)}
-                      title={n.name}
-                    >
-                      <span>{n.name}</span>
-                      <small>{n.type}</small>
-                    </button>
-                  ))}
-                  {results.length > resultLimit && (
-                    <button
-                      className="more"
-                      onClick={() => setResultLimit((n) => n + 40)}
-                    >
-                      加载更多（剩余 {results.length - resultLimit}）
-                    </button>
-                  )}
-                </div>
               </aside>
               <section className="graph-panel">
                 <div className="graph-heading">

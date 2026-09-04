@@ -456,14 +456,19 @@ input[type="checkbox"] {
   font-size: 12px;
   margin-bottom: 10px;
 }
+.search-box + .results-heading {
+  margin-top: 14px;
+  padding-top: 12px;
+}
 .results-heading span {
   color: var(--muted);
   font-size: 10px;
 }
 .results {
   overflow: auto;
-  min-height: 100px;
-  flex: 1;
+  min-height: 0;
+  max-height: 180px;
+  flex: 0 0 auto;
 }
 .entity-result {
   border: 0;
