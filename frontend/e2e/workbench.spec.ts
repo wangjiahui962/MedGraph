@@ -130,14 +130,66 @@ test("高倍缩放保持标签与连线可读", async ({ page }) => {
   });
   await page.getByRole("button", { name: "适应画布" }).click();
   await page.getByRole("button", { name: "可信筛选" }).click();
+  await page.getByLabel("最低置信度").fill("0.73");
+  await expect(page.locator(".confidence-control")).toContainText("73%");
+  await page.waitForTimeout(300);
+  await page.screenshot({
+    path: "test-results/confidence-73-connected.png",
+    fullPage: false,
+  });
   await page.getByLabel("最低置信度").fill("0.81");
   await expect(page.locator(".confidence-control")).toContainText("81%");
+  await page.waitForTimeout(300);
+  await page.screenshot({
+    path: "test-results/confidence-fitted.png",
+    fullPage: false,
+  });
   for (let index = 0; index < 8; index++)
     await page.getByRole("button", { name: "放大图谱" }).click();
   await page.waitForTimeout(300);
   expect(errors).toEqual([]);
   await page.screenshot({
     path: "test-results/confidence-zoomed.png",
+    fullPage: false,
+  });
+});
+
+test("画布节点单击高亮、双击进入聚焦", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("textbox", { name: "搜索实体名称" }).fill("猪瘟");
+  await page.getByRole("button", { name: "猪瘟 疾病", exact: true }).click();
+  await expect(page.locator(".entity-name")).toHaveText("猪瘟");
+  const canvas = page.locator(".graph-canvas");
+  const box = await canvas.boundingBox();
+  expect(box).not.toBeNull();
+  const focusX = Number(await canvas.getAttribute("data-focus-x"));
+  const focusY = Number(await canvas.getAttribute("data-focus-y"));
+  expect(Number.isFinite(focusX)).toBe(true);
+  expect(Number.isFinite(focusY)).toBe(true);
+  const x = box!.x + focusX;
+  const y = box!.y + focusY;
+  await page.mouse.click(x, y);
+  await expect(canvas).toHaveAttribute("data-highlighted-node", /.+/);
+  await page.screenshot({
+    path: "test-results/node-neighborhood-highlight.png",
+    fullPage: false,
+  });
+  await page.mouse.dblclick(x, y, { delay: 80 });
+  await expect(canvas).toHaveAttribute("data-navigated-node", /.+/);
+});
+
+test("全量图使用力导向布局而非同心圆", async ({ page }) => {
+  test.setTimeout(60_000);
+  await page.goto("/");
+  await page.getByRole("button", { name: "全量图" }).click();
+  await expect(page.locator(".mode-note")).toContainText("力导向布局", {
+    timeout: 45_000,
+  });
+  await expect(page.locator(".layout-status")).toHaveCount(0, {
+    timeout: 45_000,
+  });
+  await page.screenshot({
+    path: "test-results/full-force-layout.png",
     fullPage: false,
   });
 });

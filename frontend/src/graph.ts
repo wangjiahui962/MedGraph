@@ -171,19 +171,26 @@ function representativeView(
     (a, b) =>
       (degree.get(b.id) ?? 0) - (degree.get(a.id) ?? 0) || compare(a, b),
   );
-  const nodes = ranked.slice(0, maxNodes);
-  const visible = new Set(nodes.map((node) => node.id));
-  const edges = graph.edges
-    .filter((edge) => visible.has(edge.source) && visible.has(edge.target))
-    .sort(
+  const rankedEdges = [...graph.edges].sort(
       (a, b) =>
         (degree.get(b.source) ?? 0) + (degree.get(b.target) ?? 0) -
           (degree.get(a.source) ?? 0) -
           (degree.get(a.target) ?? 0) ||
         b.confidence - a.confidence ||
         a.id.localeCompare(b.id),
-    )
-    .slice(0, maxEdges);
+    );
+  const visible = new Set<string>();
+  const edges: Relation[] = [];
+  for (const edge of rankedEdges) {
+    if (edges.length >= maxEdges) break;
+    const additions = Number(!visible.has(edge.source)) + Number(!visible.has(edge.target));
+    if (visible.size + additions > maxNodes) continue;
+    visible.add(edge.source);
+    visible.add(edge.target);
+    edges.push(edge);
+  }
+  // 节点由最终可见边反推，避免抽样切断关系后留下“伪孤立节点”。
+  const nodes = ranked.filter((node) => visible.has(node.id));
   return {
     nodes,
     edges,
@@ -215,7 +222,7 @@ export function fullGraph(graph: Graph): GraphView {
     focusId: null,
     totalNodes: graph.nodes.length,
     totalEdges: graph.edges.length,
-    note: "全量模式使用快速同心布局，适合观察总体规模，不适合逐条阅读。",
+    note: "全量模式使用力导向布局呈现整体结构；节点较多时首次排列需要更长时间。",
   };
 }
 
@@ -274,11 +281,13 @@ export function bipartiteView(
   const visible = new Set(
     [...chosenDiseases, ...chosenSymptoms].map((node) => node.id),
   );
+  const edges = symptomEdges
+    .filter((edge) => visible.has(edge.source) && visible.has(edge.target))
+    .slice(0, maxEdges);
+  const used = new Set(edges.flatMap((edge) => [edge.source, edge.target]));
   return {
-    nodes: [...chosenDiseases, ...chosenSymptoms],
-    edges: symptomEdges
-      .filter((edge) => visible.has(edge.source) && visible.has(edge.target))
-      .slice(0, maxEdges),
+    nodes: [...chosenDiseases, ...chosenSymptoms].filter((node) => used.has(node.id)),
+    edges,
     focusId: null,
     totalNodes: diseases.length + symptoms.length,
     totalEdges: symptomEdges.length,

@@ -111,6 +111,8 @@ describe("查询与图谱范围", () => {
     expect(view.nodes).toHaveLength(80);
     expect(view.totalNodes).toBe(161);
     expect(view.totalEdges).toBe(160);
+    const endpoints = new Set(view.edges.flatMap((edge) => [edge.source, edge.target]));
+    expect(view.nodes.every((node) => endpoints.has(node.id))).toBe(true);
   });
   it("可信度阈值可调", () => {
     const quality = parseGraph(

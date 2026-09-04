@@ -80,7 +80,7 @@ const MODE_META: Record<GraphMode, { label: string; chip: string; description: s
   full: {
     label: "全量图",
     chip: "完整数据",
-    description: "加载全部节点和关系，使用快速同心布局观察总体规模",
+    description: "加载全部节点和关系，使用默认力导向布局观察总体结构",
   },
 };
 
