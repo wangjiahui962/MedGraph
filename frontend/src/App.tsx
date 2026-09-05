@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   filterGraph,
+  fullGraph,
+  confidenceView,
+  bipartiteView,
+  similarityView,
   loadGraph,
   neighborhood,
   searchNodes,
@@ -9,7 +13,11 @@ import {
   type Graph,
   type Relation,
 } from "./graph";
-import { GraphCanvas, palette } from "./GraphCanvas";
+import {
+  GraphCanvas,
+  colorForType,
+  shapeForType,
+} from "./GraphCanvas";
 import { clearDocumentsCache, fetchDocument, type DocumentRecord } from "./documents";
 import {
   fetchJobs,
@@ -40,6 +48,40 @@ const RELATION_LABELS: Record<string, string> = {
   HIGH_RISK_FOR: "高风险人群",
   BELONGS_TO: "所属分类",
   RELATED_TO: "相关关系",
+  SHARES_SYMPTOM: "共享症状",
+};
+
+const MODE_META: Record<GraphMode, { label: string; chip: string; description: string }> = {
+  overview: {
+    label: "结构概览",
+    chip: "快速概览",
+    description: "展示高连接度代表性结构；搜索与详情仍覆盖完整数据",
+  },
+  focus: {
+    label: "实体聚焦",
+    chip: "一跳邻域",
+    description: "围绕一个实体阅读它的一跳关系和原文证据",
+  },
+  confidence: {
+    label: "可信筛选",
+    chip: "阈值可调",
+    description: "按关系置信度筛选；阈值越高，网络通常越稀疏",
+  },
+  bipartite: {
+    label: "疾病—症状",
+    chip: "二部图",
+    description: "疾病与症状分列两侧，共享症状自然汇聚",
+  },
+  similarity: {
+    label: "相似疾病",
+    chip: "派生视图",
+    description: "根据共享症状连接疾病，线越粗表示共享症状越多",
+  },
+  full: {
+    label: "全量图",
+    chip: "完整数据",
+    description: "加载全部节点和关系，使用默认力导向布局观察总体结构",
+  },
 };
 
 const typeLabel = (type: string) => TYPE_LABELS[type] ?? type;
@@ -56,6 +98,8 @@ export default function App() {
   const [chosenRelations, setChosenRelations] = useState<string[]>([]);
   const [focus, setFocus] = useState<string | null>(null);
   const [graphMode, setGraphMode] = useState<GraphMode>("overview");
+  const [confidenceThreshold, setConfidenceThreshold] = useState(0.7);
+  const [legendOpen, setLegendOpen] = useState(false);
   const [edgeId, setEdgeId] = useState<string | null>(null);
   const [resultLimit, setResultLimit] = useState(40);
   const [resetKey, setResetKey] = useState(0);
@@ -188,23 +232,37 @@ export default function App() {
     [graph],
   );
   const filtered = useMemo(
-    () => (graph ? filterGraph(graph, chosenTypes, chosenRelations, graphMode !== "focus") : null),
+    () =>
+      graph
+        ? filterGraph(
+            graph,
+            chosenTypes,
+            chosenRelations,
+            graphMode === "overview" || graphMode === "full",
+          )
+        : null,
     [graph, chosenTypes, chosenRelations, graphMode],
   );
   const view = useMemo(() => {
     if (!filtered) return null;
     if (graphMode === "overview") return overview(filtered);
-    if (graphMode === "high") return overview(filtered, true);
+    if (graphMode === "full") return fullGraph(filtered);
+    if (graphMode === "confidence")
+      return confidenceView(filtered, confidenceThreshold);
+    if (graphMode === "bipartite") return bipartiteView(filtered);
+    if (graphMode === "similarity") return similarityView(filtered);
     // 搜索结果可能因左侧筛选被隐藏；选中后用完整图谱定位，避免出现“查到但看不到”。
     const focusVisible = !focus || filtered.nodes.some((n) => n.id === focus);
     return neighborhood(focus && !focusVisible ? graph ?? filtered : filtered, focus);
-  }, [filtered, graph, focus, graphMode]);
+  }, [filtered, graph, focus, graphMode, confidenceThreshold]);
   const results = useMemo(
-    () => (graph ? searchNodes(graph, query) : []),
-    [graph, query],
+    () => (filtered ? searchNodes(filtered, query) : []),
+    [filtered, query],
   );
   const selected = graph?.nodes.find((n) => n.id === view?.focusId);
-  const selectedEdge = graph?.edges.find((e) => e.id === edgeId);
+  const selectedEdge =
+    view?.edges.find((e) => e.id === edgeId) ??
+    graph?.edges.find((e) => e.id === edgeId);
   const selectedAllEdges = graph?.edges.filter(
     (e) => e.source === selected?.id || e.target === selected?.id,
   ) ?? [];
@@ -217,10 +275,6 @@ export default function App() {
     }
     return [...groups.entries()].sort((a, b) => relationLabel(a[0]).localeCompare(relationLabel(b[0]), "zh-CN"));
   }, [selectedAllEdges]);
-  const related =
-    filtered?.edges.filter(
-      (e) => e.source === selected?.id || e.target === selected?.id,
-    ) ?? [];
   const names = useMemo(
     () => new Map(graph?.nodes.map((n) => [n.id, n.name])),
     [graph],
@@ -238,6 +292,8 @@ export default function App() {
     setGraphMode("overview");
     setEdgeId(null);
     setResultLimit(40);
+    setConfidenceThreshold(0.7);
+    setLegendOpen(false);
     setResetKey((k) => k + 1);
   }
   function toggle(
@@ -412,7 +468,7 @@ export default function App() {
                       title={n.name}
                     >
                       <span>{n.name}</span>
-                      <small>{n.type}</small>
+                      <small>{typeLabel(n.type)}</small>
                     </button>
                   ))}
                   {results.length > resultLimit && (
@@ -448,7 +504,7 @@ export default function App() {
                         />
                         <i
                           style={{
-                            background: palette[index % palette.length],
+                            background: colorForType(type, index),
                           }}
                         />
                         {typeLabel(type)}
@@ -494,29 +550,97 @@ export default function App() {
                 <div className="graph-heading">
                   <div>
                     <h2>
-                      关系图谱 <span className="chip">{graphMode === "overview" ? "全图总览" : graphMode === "high" ? "高可信关系" : "一跳邻域"}</span>
+                      关系图谱 <span className="chip">{MODE_META[graphMode].chip}</span>
                     </h2>
                     <p>
-                      {graphMode === "overview" ? (
-                        <>完整图谱总览 · 鼠标悬停查看节点名称</>
-                      ) : graphMode === "high" ? (
-                        <>仅显示高可信关系 · 点击节点聚焦</>
-                      ) : selected ? (
+                      {graphMode === "focus" && selected ? (
                         <>
-                          以 <strong>{selected.name}</strong> 为中心
+                          以 <strong>{selected.name}</strong> 为中心 · 点击连线查看证据
                         </>
                       ) : (
-                        "暂无可展示实体"
+                        MODE_META[graphMode].description
                       )}
                     </p>
                   </div>
-                  <div className="graph-mode-switch" role="group" aria-label="图谱视图模式">
-                    {([['overview', '全图'], ['focus', '聚焦'], ['high', '仅高可信']] as [GraphMode, string][]).map(([mode, label]) => (
-                      <button key={mode} className={graphMode === mode ? "active" : ""} onClick={() => { setGraphMode(mode); if (mode !== "focus") setFocus(null); setEdgeId(null); }}>{label}</button>
-                    ))}
-                    <button className="reset" onClick={reset}>↺ 恢复默认</button>
+                  <div className="graph-actions">
+                    <div className="graph-mode-switch" role="group" aria-label="图谱视图模式">
+                      {(Object.entries(MODE_META) as [GraphMode, (typeof MODE_META)[GraphMode]][]).map(([mode, meta]) => (
+                        <button
+                          key={mode}
+                          className={graphMode === mode ? "active" : ""}
+                          onClick={() => {
+                            setGraphMode(mode);
+                            if (mode !== "focus") setFocus(null);
+                            setEdgeId(null);
+                          }}
+                        >
+                          {meta.label}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="graph-utility-switch">
+                      <button
+                        className={legendOpen ? "active" : ""}
+                        aria-expanded={legendOpen}
+                        onClick={() => setLegendOpen((open) => !open)}
+                      >
+                        ◫ 图例与方向
+                      </button>
+                      <button className="reset" onClick={reset}>↺ 恢复默认</button>
+                    </div>
                   </div>
                 </div>
+                {graphMode === "confidence" && (
+                  <div className="confidence-control">
+                    <label htmlFor="confidence-threshold">
+                      最低置信度 <strong>{Math.round(confidenceThreshold * 100)}%</strong>
+                    </label>
+                    <input
+                      id="confidence-threshold"
+                      type="range"
+                      min="0.5"
+                      max="0.81"
+                      step="0.01"
+                      value={confidenceThreshold}
+                      onChange={(event) => {
+                        setConfidenceThreshold(Number(event.target.value));
+                        setEdgeId(null);
+                      }}
+                    />
+                    <span>
+                      当前满足条件：{view?.totalEdges?.toLocaleString() ?? 0} 条关系
+                    </span>
+                  </div>
+                )}
+                {legendOpen && (
+                  <div className="graph-legend-panel" role="region" aria-label="图例与关系方向说明">
+                    <div className="legend-section entity-legend">
+                      <strong>实体类型</strong>
+                      <div>
+                        {types.map((type, index) => (
+                          <span key={type}>
+                            <i
+                              className={`entity-swatch ${shapeForType(type)}`}
+                              style={{ background: colorForType(type, index) }}
+                            />
+                            {typeLabel(type)}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="legend-section">
+                      <strong>关系置信度</strong>
+                      <span><i className="legend-line high" />高可信 ≥ 80%</span>
+                      <span><i className="legend-line medium" />中可信 60%～79%</span>
+                      <span><i className="legend-line review" />待核验 &lt; 60%</span>
+                    </div>
+                    <div className="legend-section direction-explainer">
+                      <strong>为什么有箭头？</strong>
+                      <span><b>疾病</b> —常见症状→ <b>症状</b></span>
+                      <small>箭头从三元组主语指向宾语；“相关关系”和派生的“共享症状”是对称关系，因此使用无箭头直线。</small>
+                    </div>
+                  </div>
+                )}
                 {view && (
                   <GraphCanvas
                     key={resetKey}
@@ -528,11 +652,13 @@ export default function App() {
                     mode={graphMode}
                   />
                 )}
+                {view?.note && <div className="mode-note">{view.note}</div>}
                 {view && view.totalNodes > view.nodes.length && (
                   <div className="limit-notice" role="status">
-                    邻域共 {view.totalNodes} 个实体，当前仅展示前{" "}
-                    {view.nodes.length}{" "}
-                    个。请搜索或筛选缩小范围；右侧列表保留全部关联关系。
+                    此模式涉及 {view.totalNodes.toLocaleString()} 个实体
+                    {view.totalEdges !== undefined && <>、{view.totalEdges.toLocaleString()} 条关系</>}；
+                    为保持交互流畅，当前展示 {view.nodes.length.toLocaleString()} 个实体、
+                    {view.edges.length.toLocaleString()} 条关系。可通过搜索、筛选或聚焦继续查看。
                   </div>
                 )}
                 <div className="graph-footer">
@@ -540,12 +666,22 @@ export default function App() {
                     当前视图 <b>{view?.nodes.length ?? 0}</b> 个实体 ·{" "}
                     <b>{view?.edges.length ?? 0}</b> 条关系
                   </span>
-                  <span>箭头表示关系方向</span>
+                  <span>
+                    {graphMode === "similarity"
+                      ? "无箭头：连线表示疾病共享症状"
+                      : "箭头：主语 → 关系 → 宾语；对称关系不加箭头"}
+                  </span>
                 </div>
               </section>
               <aside className="details">
                 <div className="panel-heading">
-                  <h2>{selectedEdge ? "关系证据" : "实体详情"}</h2>
+                  <h2>
+                    {selectedEdge
+                      ? selectedEdge.derived
+                        ? "相似关系说明"
+                        : "关系证据"
+                      : "实体详情"}
+                  </h2>
                   <span>02</span>
                 </div>
                 {selectedEdge ? (
@@ -555,40 +691,61 @@ export default function App() {
                     </button>
                     <div className="evidence-title">
                       <strong>{names.get(selectedEdge.source)}</strong>
-                      <span>↓ {relationLabel(selectedEdge.relation)}</span>
+                      <span>
+                        {selectedEdge.derived ? "—" : "↓"} {relationLabel(selectedEdge.relation)}
+                      </span>
                       <strong>{names.get(selectedEdge.target)}</strong>
                     </div>
-                    <div className={`confidence-badge ${selectedEdge.confidence < 0.6 ? "review" : selectedEdge.confidence < 0.8 ? "medium" : "high"}`}>
-                      置信度 {Math.round(selectedEdge.confidence * 100)}% · {confidenceLabel(selectedEdge.confidence)}
-                    </div>
-                    <div className="section-label">
-                      原文证据 <span>{selectedEdge.evidence.length} 条</span>
-                    </div>
-                    {selectedEdge.evidence.length ? (
-                      selectedEdge.evidence.map((e, index) => (
-                        <EvidenceBlock
-                          key={index}
-                          index={index}
-                          documentId={e.documentId}
-                          text={e.text}
-                        />
-                      ))
+                    {selectedEdge.derived ? (
+                      <div className="derived-edge">
+                        <span>前端派生分析</span>
+                        <strong>
+                          共享 {selectedEdge.weight ?? selectedEdge.sharedNames?.length ?? 0} 个症状
+                        </strong>
+                        <div>
+                          {selectedEdge.sharedNames?.map((name) => (
+                            <i key={name}>{name}</i>
+                          ))}
+                        </div>
+                        <p>
+                          这条线由已有“疾病—症状”关系计算得到，不是抽取出的新事实，也不代表医学诊断结论。
+                        </p>
+                      </div>
                     ) : (
-                      <p className="muted">暂无来源信息</p>
+                      <>
+                        <div className={`confidence-badge ${selectedEdge.confidence < 0.6 ? "review" : selectedEdge.confidence < 0.8 ? "medium" : "high"}`}>
+                          置信度 {Math.round(selectedEdge.confidence * 100)}% · {confidenceLabel(selectedEdge.confidence)}
+                        </div>
+                        <div className="section-label">
+                          原文证据 <span>{selectedEdge.evidence.length} 条</span>
+                        </div>
+                        {selectedEdge.evidence.length ? (
+                          selectedEdge.evidence.map((e, index) => (
+                            <EvidenceBlock
+                              key={index}
+                              index={index}
+                              documentId={e.documentId}
+                              text={e.text}
+                            />
+                          ))
+                        ) : (
+                          <p className="muted">暂无来源信息</p>
+                        )}
+                        <p className="evidence-note">
+                          以上为抽取时保留的原句，不代表人工核验结论。
+                        </p>
+                      </>
                     )}
-                    <p className="evidence-note">
-                      以上为抽取时保留的原句，不代表人工核验结论。
-                    </p>
                   </>
                 ) : selected ? (
                   <>
                     <span
                       className="type-badge"
                       style={{
-                        color:
-                          palette[
-                          types.indexOf(selected.type) % palette.length
-                          ],
+                        color: colorForType(
+                          selected.type,
+                          types.indexOf(selected.type),
+                        ),
                       }}
                     >
                       {typeLabel(selected.type)}
@@ -617,14 +774,20 @@ export default function App() {
                               className="relation-link"
                               onClick={() => setEdgeId(e.id)}
                             >
-                              <span className="direction">{e.source === selected.id ? "↗" : "↙"}</span>
+                              <span className="direction">
+                                {e.relation === "RELATED_TO"
+                                  ? "—"
+                                  : e.source === selected.id
+                                    ? "↗"
+                                    : "↙"}
+                              </span>
                               <span>查看证据 ›</span>
                             </button>
                             <button
                               className="neighbor"
                               onClick={() => pickNode(other)}
                             >
-                              {names.get(other)} <small>{typeLabel(graph?.nodes.find((n) => n.id === other)?.type ?? "")}</small> <span>→</span>
+                              {names.get(other)} <small>{typeLabel(graph?.nodes.find((n) => n.id === other)?.type ?? "")}</small> <span>›</span>
                             </button>
                               </article>
                             );
@@ -653,20 +816,34 @@ export default function App() {
 }
 
 function Dashboard({ graph }: { graph: Graph }) {
-  const typeCounts = [...new Map(graph.nodes.map((n) => [n.type, graph.nodes.filter((x) => x.type === n.type).length])).entries()]
-    .sort((a, b) => b[1] - a[1]);
-  const relationCounts = [...new Map(graph.edges.map((e) => [e.relation, graph.edges.filter((x) => x.relation === e.relation).length])).entries()]
-    .sort((a, b) => b[1] - a[1]);
-  const degree = new Map(graph.nodes.map((n) => [n.id, 0]));
-  graph.edges.forEach((e) => {
-    degree.set(e.source, (degree.get(e.source) ?? 0) + 1);
-    if (e.source !== e.target) degree.set(e.target, (degree.get(e.target) ?? 0) + 1);
-  });
-  const core = graph.nodes.map((n) => ({ ...n, degree: degree.get(n.id) ?? 0 }))
-    .sort((a, b) => b.degree - a.degree || a.name.localeCompare(b.name, "zh-CN"))
-    .slice(0, 5);
-  const isolated = graph.nodes.filter((n) => (degree.get(n.id) ?? 0) === 0).length;
-  const lowQuality = graph.edges.filter((e) => e.confidence < 0.6).length;
+  const { typeCounts, relationCounts, core, isolated, lowQuality } = useMemo(() => {
+    const typeMap = new Map<string, number>();
+    const relationMap = new Map<string, number>();
+    const degree = new Map(graph.nodes.map((node) => [node.id, 0]));
+    for (const node of graph.nodes)
+      typeMap.set(node.type, (typeMap.get(node.type) ?? 0) + 1);
+    let low = 0;
+    for (const edge of graph.edges) {
+      relationMap.set(edge.relation, (relationMap.get(edge.relation) ?? 0) + 1);
+      degree.set(edge.source, (degree.get(edge.source) ?? 0) + 1);
+      if (edge.source !== edge.target)
+        degree.set(edge.target, (degree.get(edge.target) ?? 0) + 1);
+      if (edge.confidence < 0.6) low++;
+    }
+    return {
+      typeCounts: [...typeMap.entries()].sort((a, b) => b[1] - a[1]),
+      relationCounts: [...relationMap.entries()].sort((a, b) => b[1] - a[1]),
+      core: graph.nodes
+        .map((node) => ({ ...node, degree: degree.get(node.id) ?? 0 }))
+        .sort(
+          (a, b) =>
+            b.degree - a.degree || a.name.localeCompare(b.name, "zh-CN"),
+        )
+        .slice(0, 5),
+      isolated: graph.nodes.filter((node) => (degree.get(node.id) ?? 0) === 0).length,
+      lowQuality: low,
+    };
+  }, [graph]);
   const typeTotal = typeCounts.reduce((sum, [, count]) => sum + count, 0) || 1;
   const relationTotal = relationCounts.reduce((sum, [, count]) => sum + count, 0) || 1;
   const makeGradient = (items: [string, number][], colors: string[]) => {
@@ -778,11 +955,13 @@ function EvidenceBlock({
         <div className="doc-original">
           {status === "loading" && <p className="muted">正在加载文档原文…</p>}
           {status === "missing" && (
-            <p className="muted">未找到 {documentId} 的原文数据。</p>
+            <p className="muted">
+              当前数据包未包含 {documentId} 的完整文档；上方抽取原句仍可用于核对。
+            </p>
           )}
           {status === "error" && (
             <p className="muted">
-              原文加载失败，请确认已生成并同步 documents.json。
+              当前数据包未同步完整文档；上方抽取原句仍可用于核对。
             </p>
           )}
           {status === "ready" && record && (
